@@ -1,17 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Codetext:</strong>
-  <%= @product.codeText %>
+  <strong>Codigo:</strong>
+  <%= @product.codeText + @product.codeNumber.to_s%>
 </p>
 
 <p>
-  <strong>Codenumber:</strong>
-  <%= @product.codeNumber %>
-</p>
-
-<p>
-<strong>Codigo de barra</strong>
+<strong>Codigo de barra: </strong>
 <%
 
 require 'barby'
@@ -29,9 +24,9 @@ File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 3, :xdim => 2,
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Descripción:</strong>
   <%= @product.description %>
 </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<%= link_to 'Editar Producto', edit_product_path(@product) %> |
+<%= link_to 'Volver', products_path %>

@@ -1,11 +1,10 @@
-<h1>Listing products</h1>
+<h1>Listado de Productos</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Codetext</th>
-      <th>Codenumber</th>
-      <th>Description</th>
+      <th>Codigo</th>
+      <th>Descriptión</th>
       <th></th>
       <th></th>
       <th></th>
@@ -15,12 +14,11 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= product.codeText %></td>
-        <td><%= product.codeNumber %></td>
+        <td><%= product.codeText + product.codeNumber.to_s %></td>
         <td><%= product.description %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver Producto', product %></td>
+        <td><%= link_to 'Editar Producto', edit_product_path(product) %></td>
+        <td><%= link_to 'Eliminar Producto', product, method: :delete, data: { confirm: 'Con esto eliminara el producto de forma permanente, esta seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Product', new_product_path %>
+<%= link_to 'Insertar un nuevo producto', new_product_path %>

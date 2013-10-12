@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :codeText %><br>
-    <%= f.text_field :codeText %>
-  </div>
-  <div class="field">
-    <%= f.label :codeNumber %><br>
+    <%= f.label "Parte numerica del codigo" %><br>
     <%= f.number_field :codeNumber %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label "Siglas del codigo (Texto)" %><br>
+    <%= f.text_field :codeText %>
+  </div>
+  <div class="field">
+    <%= f.label "descripción" %><br>
     <%= f.text_field :description %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Crear Producto"%>
   </div>
 <% end %>
