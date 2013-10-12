@@ -13,15 +13,15 @@
 
   <div class="field">
     <%= f.label "Parte numerica del codigo" %><br>
-    <%= f.number_field :codeNumber %>
+    <%= f.text_field :codeNumber, :required => true, :pattern =>'[0-9]+', :placeholder => 'p.e. 021305403'%>
   </div>
   <div class="field">
     <%= f.label "Siglas del codigo (Texto)" %><br>
-    <%= f.text_field :codeText %>
+    <%= f.text_field :codeText, :required => true, :pattern =>'([A-Z]|[0-9])+', :placeholder => 'p.e. SOD'%>
   </div>
   <div class="field">
     <%= f.label "descripción" %><br>
-    <%= f.text_field :description %>
+    <%= f.text_field :description,:required => true, :placeholder => 'p.e. Destornillador de punta Sodimac' %>
   </div>
   <div class="actions">
     <%= f.submit "Crear Producto"%>

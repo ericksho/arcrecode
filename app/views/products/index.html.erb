@@ -14,7 +14,7 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= product.codeText + product.codeNumber.to_s %></td>
+        <td><%= product.codeNumber.to_s + product.codeText%></td>
         <td><%= product.description %></td>
         <td><%= link_to 'Ver Producto', product %></td>
         <td><%= link_to 'Editar Producto', edit_product_path(product) %></td>

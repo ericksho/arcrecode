@@ -25,13 +25,30 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
+    unique = true;
+
+    products = Product.where("codeNumber = ?",@product.codeNumber)
+    if products.count > 1
+      products.each do |productT| 
+        if productT.codeText.eql? @product.codeText
+          unique = false;
+        end
+      end
+    end
 
     respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @product }
+      if unique 
+        if @product.save
+          format.html { redirect_to @product, notice: 'El producto se ha creado exitosamente.' }
+          format.json { render action: 'show', status: :created, location: @product }
+        else
+          flash[:notice] = 'Error al ingresar el producto, por favor intentelo nuevamente.'
+          format.html { render action: 'new'}
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render action: 'new' }
+        flash[:notice] = 'No puede repetir el codigo del producto.'
+        format.html { render action: 'new'}
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
@@ -42,7 +59,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to @product, notice: 'El producto se ha actializado correctamente.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
