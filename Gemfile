@@ -33,6 +33,12 @@ gem "twitter-bootstrap-rails"
 # use devise for auth
 gem 'devise'
 
+#gem for generate barcode
+gem 'barby'
+gem 'chunky_png'
+gem "has_barcode"
+
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
