@@ -1,4 +1,5 @@
 Arcrecode::Application.routes.draw do
+  get "index/index"
   devise_for :users
   resources :products
 
@@ -6,7 +7,7 @@ Arcrecode::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root :to => 'products#index'
+   root :to => 'index#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
