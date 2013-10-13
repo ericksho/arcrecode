@@ -1,5 +1,9 @@
 Arcrecode::Application.routes.draw do
+
+  get "print/select"
+  get "print/sheet", as: 'print_sheet'
   get "index/index"
+
   devise_for :users
   resources :products
 
