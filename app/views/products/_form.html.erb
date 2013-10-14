@@ -1,3 +1,4 @@
+<form autocomplete="off">
 <%= form_for(@product) do |f| %>
   <% if @product.errors.any? %>
     <div id="error_explanation">
@@ -17,7 +18,7 @@
   </div>
   <div class="field">
     <%= f.label "Siglas del codigo (Texto)" %><br>
-    <%= f.text_field :codeText, :required => true, :pattern =>'([A-Z]|[0-9])+', :placeholder => 'p.e. SOD'%>
+    <%= f.text_field :codeText, :required => true, :pattern =>'([A-Z]|[0-9])+', :placeholder => 'p.e. SOD', 'data-provide' => 'typeahead', 'data-source' => @autocomplete_codes.to_json%>
   </div>
   <div class="field">
     <%= f.label "descripción" %><br>

@@ -17,6 +17,11 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    products = Product.all
+    @autocomplete_codes = Array.new
+    products.each do |prod|
+      @autocomplete_codes.push prod.codeText
+    end
   end
 
   # GET /products/1/edit
