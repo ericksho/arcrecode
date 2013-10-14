@@ -2,6 +2,15 @@ class PrintController < ApplicationController
 	before_filter :authenticate_user!
   def select
   	@codeCount = 6
+
+    products = Product.all
+    @autocomplete_codes = Array.new
+    @dataSource = ''
+    products.each do |product|
+      c = product.codeNumber.to_s + product.codeText
+      @autocomplete_codes.push c
+      
+    end
   end
 
   def sheet
