@@ -4,6 +4,8 @@ require 'barby/barcode/code_39'
 require 'barby/outputter/png_outputter' 
 %>
 
+<p>impresion</p>
+
 <% for i in 1..@codeCount %>
 	<%
 	barcode_value = @codes.at(i).to_s

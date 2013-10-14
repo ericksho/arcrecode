@@ -38,6 +38,10 @@
   </head>
   <body>
 
+  <% if controller.action_name.eql? 'sheet' %>
+    <%= yield %>
+  <% else %>
+
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -79,6 +83,7 @@
             <%= bootstrap_flash %>
             <%= yield %>
           </div>
+          <!--
           <div class="span3">
             <div class="well sidebar-nav">
             </br>
@@ -89,15 +94,17 @@
                 <li><%= link_to "Link2", "/path2"  %></li>
                 <li><%= link_to "Link3", "/path3"  %></li>
               </ul>
-            </div><!--/.well -->
-          </div><!--/span-->
-        </div><!--/row-->
+            </div>
+          </div>
+          -->
+        </div>
+        
 
       <footer>
         <p>&copy; ericksho 2013</p>
       </footer>
 
     </div> <!-- /container -->
-
+    <% end %>
   </body>
 </html>
