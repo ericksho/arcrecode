@@ -1,2 +1,20 @@
-<h1>Print#sheet</h1>
-<p>Find me in app/views/print/sheet.html.erb</p>
+<%
+require 'barby'
+require 'barby/barcode/code_39'
+require 'barby/outputter/png_outputter' 
+%>
+
+<% for i in 1..@codeCount %>
+	<%
+	barcode_value = @codes.at(i).to_s
+	full_path = "app/assets/images/" + barcode_value + ".png"
+	barcode = Barby::Code39.new(barcode_value)
+	File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 3, :xdim => 2, :height => 55) }
+	%>
+
+	<%= image_tag barcode_value + ".png"%>
+	</br>
+	<%= barcode_value %>
+	</br>
+	</br>
+<% end %>
