@@ -1,4 +1,4 @@
-Arcrecode::Application.routes.draw do
+hArcrecode::Application.routes.draw do
 
   get "print/select", as: 'print_select'
   get "print/sheet", as: 'print_sheet'
@@ -12,7 +12,7 @@ Arcrecode::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root :to => 'index#index'
+   root :to 'index#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
