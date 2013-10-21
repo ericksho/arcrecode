@@ -31,12 +31,15 @@ gem 'jbuilder', '~> 1.2'
 gem "twitter-bootstrap-rails"
 
 # use devise for auth
-gem 'devise'
+bgem 'devise'
 
 #gem for generate barcode
 gem 'barby'
 gem 'chunky_png'
 gem "has_barcode"
+
+#gem 'rails_12factor' for heroku
+gem 'rails_12factor'
 
 
 group :doc do
