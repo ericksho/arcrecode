@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 1.2'
 gem "twitter-bootstrap-rails"
 
 # use devise for auth
-bgem 'devise'
+gem 'devise'
 
 #gem for generate barcode
 gem 'barby'
