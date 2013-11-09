@@ -1,4 +1,4 @@
-hArcrecode::Application.routes.draw do
+Arcrecode::Application.routes.draw do
 
   get "print/select", as: 'print_select'
   get "print/sheet", as: 'print_sheet'

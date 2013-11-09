@@ -66,10 +66,10 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'El producto se ha actializado correctamente.' }
+        format.html { redirect_to @product, notice: 'El producto se ha actualizado correctamente.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'edit', notice: 'Error al actualizar.' }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
