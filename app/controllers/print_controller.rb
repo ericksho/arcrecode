@@ -1,7 +1,7 @@
 class PrintController < ApplicationController
 	before_filter :authenticate_user!
   def select
-  	@codeCount = 6
+  	@codeCount = 12
 
     products = Product.all
     @autocomplete_codes = Array.new

@@ -3,32 +3,32 @@ require 'barby'
 require 'barby/barcode/code_39'
 require 'barby/outputter/png_outputter' 
 %>
-</br>
 
 <table border="0" width="700px">
 <col width="335">
 <tr>
 
 <% for i in 1..@codeCount %>
-	<%
-	barcode_value = @codes.at(i).to_s
-	full_path = "app/assets/images/" + barcode_value + ".png"
-	barcode = Barby::Code39.new(barcode_value)
-	png = barcode.to_png(:margin => 3, :xdim => 2, :height => 55)
-	img = png.to_yaml.gsub('--- !binary |-','')
-	%>
+	<%if @codes.at(i).to_s != ''%>
+		<%
+		barcode_value = @codes.at(i).to_s
+		barcode = Barby::Code39.new(barcode_value)
+		png = barcode.to_png(:margin => 3, :xdim => 2, :height => 55)
+		img = png.to_yaml.gsub('--- !binary |-','')
+		%>
 
-	<td>
-		<%= image_tag "data:image/png;base64," + img %>
+		<td>
+			</br>
+			<%= image_tag "data:image/png;base64," + img %>
 
-		</br>
-		<%= barcode_value %>
-		</br>
-	</td>
+			</br>
+			<%= barcode_value %>
+			</br>
+		</td>
 
-	<% if i % 2 == 0 %>
-		<tr>
-		</tr>
+		<% if i % 2 == 0 %>
+			<tr></tr>
+		<% end %>
 	<% end %>
 
 <% end %>
