@@ -4,8 +4,15 @@
 <%= hidden_field_tag 'codeCount', @codeCount %>
 	<% for i in 1..@codeCount %>
 		<%= label_tag 'inserte codigo ' + i.to_s %>
-		<%= text_field_tag "code_" + i.to_s, nil, placeholder: 'p.e. 123COD', 'data-provide' => 'typeahead', 'data-source' => @autocomplete_codes.to_json%>
+		<% text_field_tag "code_" + i.to_s, nil, placeholder: 'p.e. 123COD', 'data-provide' => 'typeahead', 'data-source' => @autocomplete_codes.to_json%>
+		<%= select_tag "code_" + i.to_s, options_for_select(@autocomplete_codes), class: 'combobox',include_blank: true%>
 	<% end %>
 	</br>
 	<%= submit_tag 'Imprimir' %>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.combobox').combobox();
+  });
+</script>
