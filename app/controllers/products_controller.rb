@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     unique = true;
 
-    products = Product.where("codeNumber = ?",@product.codeNumber)
+    products = Product.where(:codeNumber => @product.codeNumber)
     if products.count > 1
       products.each do |productT| 
         if productT.codeText.eql? @product.codeText
