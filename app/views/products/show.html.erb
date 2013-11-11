@@ -16,11 +16,12 @@ require 'barby/outputter/png_outputter'
 barcode_value = @product.codeNumber.to_s + @product.codeText
 full_path = "app/assets/images/" + barcode_value + ".png"
 barcode = Barby::Code39.new(barcode_value)
-File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 3, :xdim => 2, :height => 55) }
+
+png = barcode.to_png(:margin => 3, :xdim => 2, :height => 55)
+img = png.to_yaml.gsub('--- !binary |-','')
 %>
 
-<%= image_tag barcode_value + ".png"%>
-
+<%= image_tag "data:image/png;base64," + img %>
 </p>
 
 <p>
