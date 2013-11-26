@@ -1,5 +1,7 @@
 Arcrecode::Application.routes.draw do
 
+  get "upload/select"
+  get "upload/successful"
   get "print/select", as: 'print_select'
   get "print/sheet", as: 'print_sheet'
   get "index/index"

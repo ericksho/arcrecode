@@ -1,6 +1,6 @@
 <h1>Listado de Productos</h1>
 
-<table>
+<table class="table table-hover table-striped">
   <thead>
     <tr>
       <th>Codigo</th>
@@ -16,9 +16,9 @@
       <tr>
         <td><%= product.codeNumber.to_s + product.codeText%></td>
         <td><%= product.description %></td>
-        <td><%= link_to 'Ver Producto', product %></td>
-        <td><%= link_to 'Editar Producto', edit_product_path(product) %></td>
-        <td><%= link_to 'Eliminar Producto', product, method: :delete, data: { confirm: 'Con esto eliminara el producto de forma permanente, esta seguro?' } %></td>
+        <td><%= button_to 'Ver Producto', product, class: 'btn btn-info btn-xs', :method => :get %></td>
+        <td><%= button_to 'Editar Producto', edit_product_path(product), class: 'btn btn-success btn-xs', :method => :get %></td>
+        <td><%= button_to 'Eliminar Producto', product, method: :delete, data: { confirm: 'Con esto eliminara el producto de forma permanente, esta seguro?' }, class: 'btn btn-danger btn-xs'%></td>
       </tr>
     <% end %>
   </tbody>
