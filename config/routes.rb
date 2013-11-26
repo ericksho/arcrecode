@@ -6,6 +6,8 @@ Arcrecode::Application.routes.draw do
   get "print/sheet", as: 'print_sheet'
   get "index/index"
   post 'print/sheet', as: 'print_sheet_p'
+  get "print/selectSamples", as: 'print_select_sample'
+  post 'print/sheetSample', as: 'print_sheet_sample'
 
   devise_for :users
   resources :products

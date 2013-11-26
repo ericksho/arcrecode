@@ -1,6 +1,6 @@
-<h1>Selección para imprimir</h1>
+<h1>Selección para imprimir muestras</h1>
 <p>Seleccione los códigos que desea imprimir</p>
-<%= form_tag print_sheet_p_path, :method=>'post',:target => "_blank"  do %>
+<%= form_tag print_sheet_sample_path, :method=>'post', :target => "_blank"  do %>
 
 <table border="0" width="700px">
 <col width="335">
@@ -23,7 +23,7 @@
 
 	</table>
 
-	<%= submit_tag 'Imprimir' %>
+	<%= submit_tag 'Imprimir Muestras' %>
 <% end %>
 
 

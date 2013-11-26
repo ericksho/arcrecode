@@ -38,7 +38,7 @@
   </head>
   <body>
 
-  <% if controller.action_name.eql? 'sheet' %>
+  <% if controller.action_name.include? 'sheet' %>
     <%= yield %>
   <% else %>
 
@@ -56,6 +56,7 @@
               <li><%= link_to "Insertar Producto", new_product_path  %></li>
               <li><%= link_to "Productos", products_path  %></li>
               <li><%= link_to "Imprimir Codigos", print_select_path  %></li>
+              <li><%= link_to "Imprimir Muestras", print_select_sample_path  %></li>
             </ul>
 
             <p class="navbar-text pull-right">
