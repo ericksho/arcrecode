@@ -1,5 +1,11 @@
 Arcrecode::Application.routes.draw do
 
+  get "admin/list"
+  get "admin/edit"
+  get "admin/new"
+  get "admin/create"
+  get "controllername/new"
+  get "controllername/create"
   get "upload/select"
   get "upload/successful"
   get "print/select", as: 'print_select'
@@ -8,9 +14,18 @@ Arcrecode::Application.routes.draw do
   post 'print/sheet', as: 'print_sheet_p'
   get "print/selectSamples", as: 'print_select_sample'
   post 'print/sheetSample', as: 'print_sheet_sample'
+  post 'admin/new', as: 'new_user'
+  get 'admin/list', as: 'users_list'
+  get 'admin/edit/:id', to: 'admin#edit', as: 'edit_user'
+  post 'admin/delete_user', as: 'delete_user'
+
 
   devise_for :users
   resources :products
+
+  resources :admin do
+    post :create_user, on: :collection
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
