@@ -16,8 +16,10 @@
     <%= f.text_field :codeNumber, :required => true, :pattern =>'[0-9]+', :placeholder => 'p.e. 021305403'%>
   </div>
   <div class="field">
-    <%= f.label "Siglas del codigo (Texto)" %>
-    <%= f.text_field :codeText, :required => true, :pattern =>'([A-Z]|[0-9])+', :placeholder => 'p.e. SOD', id: "auto_complete"%>
+    <!--<%= f.label "Siglas del codigo (Texto)" %>
+    <%= f.text_field :codeText, :required => true, :pattern =>'([A-Z]|[0-9])+', :placeholder => 'p.e. SOD', id: "auto_complete"%>-->
+    <%= f.label "Se agregará automáticamente 01 al código como indicador de la empresa" %>
+    <%= f.hidden_field :codeText, :value => '01'%>
   </div>
   <div class="field">
     <%= f.label "descripción" %>

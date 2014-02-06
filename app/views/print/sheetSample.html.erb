@@ -1,17 +1,9 @@
-<%
-require 'barby'
-require 'barby/barcode/code_39'
-require 'barby/outputter/png_outputter' 
-%>
-
 <% for i in 1..@codeCount %>
 	<%if @codes.at(i).to_s != ''%>
 
-		<%
-		barcode_value = @codes.at(i).to_s
-		barcode = Barby::Code39.new(barcode_value)
-		png = barcode.to_png(:margin => 3, :xdim => 2, :height => 55)
-		img = png.to_yaml.gsub('--- !binary |-','')
+		<% 
+			barcode_value = @codes.at(i).to_s
+			img = Product.getImg barcode_value 
 		%>
 
 		</br>

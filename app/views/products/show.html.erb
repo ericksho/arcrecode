@@ -2,24 +2,13 @@
 
 <p>
   <strong>Codigo:</strong>
-  <%= @product.codeText + @product.codeNumber.to_s%>
+  <%= @product.codeNumber.to_s + @product.codeText %>
 </p>
 
 <p>
 <strong>Codigo de barra: </strong>
-<%
 
-require 'barby'
-require 'barby/barcode/code_39'
-require 'barby/outputter/png_outputter'
- 
-barcode_value = @product.codeNumber.to_s + @product.codeText
-full_path = "app/assets/images/" + barcode_value + ".png"
-barcode = Barby::Code39.new(barcode_value)
-
-png = barcode.to_png(:margin => 3, :xdim => 2, :height => 55)
-img = png.to_yaml.gsub('--- !binary |-','')
-%>
+<% img = @product.getBarcode %>
 
 <%= image_tag "data:image/png;base64," + img %>
 </p>
