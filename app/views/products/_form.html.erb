@@ -11,16 +11,30 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label "Parte numerica del codigo" %>
-    <%= f.text_field :codeNumber, :required => true, :pattern =>'[0-9]+', :placeholder => 'p.e. 021305403'%>
-  </div>
-  <div class="field">
-    <!--<%= f.label "Siglas del codigo (Texto)" %>
-    <%= f.text_field :codeText, :required => true, :pattern =>'([A-Z]|[0-9])+', :placeholder => 'p.e. SOD', id: "auto_complete"%>-->
-    <%= f.label "Se agregará automáticamente 01 al código como indicador de la empresa" %>
-    <%= f.hidden_field :codeText, :value => '01'%>
-  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>País</th>
+        <th>Empresa</th>
+        <th>Producto</th>
+        <th>Digito Verificador</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= f.number_field :country, :value => '780', :disabled => true %></td>
+        <td><%= f.select :enterprise, [["Dais",0001],["Arcre",0002],["Armand",0003]]%></td>
+        <td><%= f.number_field :product, :min => 0, :max => 9999, :value => 02%></td>
+        <td><%= f.text_field :verifyDigit, :value => '?', :disabled => true%></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <% p = Product.new() %>
+  <%= p.getVerifyDigit%>
+
+
   <div class="field">
     <%= f.label "descripción" %>
     <%= f.text_field :description,:required => true, :placeholder => 'p.e. Destornillador de punta Sodimac' %>

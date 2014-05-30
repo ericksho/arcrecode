@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
     products = Product.all
     @autocomplete_codes = Array.new
     products.each do |prod|
-      @autocomplete_codes.push prod.codeText
+      @autocomplete_codes.push prod.product
     end
   end
 
@@ -31,10 +31,13 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+
+    
+
     @product = Product.new(product_params)
     unique = true;
 
-    products = Product.where(:codeNumber => @product.codeNumber)
+    products = Product.where(:product => @product.product)
     if products.count > 1
       products.each do |productT| 
         if productT.codeText.eql? @product.codeText
@@ -93,6 +96,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:codeText, :codeNumber, :description)
+      params.require(:product).permit(:country, :enterprise, :description, :product, :verifyDigit)
     end
 end
