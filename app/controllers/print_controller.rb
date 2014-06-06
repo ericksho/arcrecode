@@ -7,7 +7,7 @@ class PrintController < ApplicationController
     @autocomplete_codes = Array.new
     @dataSource = ''
     products.each do |product|
-      c = product.codeNumber.to_s + product.codeText
+      c = product.getStringCode
       @autocomplete_codes.push c
       
     end
@@ -30,7 +30,7 @@ class PrintController < ApplicationController
     @autocomplete_codes = Array.new
     @dataSource = ''
     products.each do |product|
-      c = product.codeNumber.to_s + product.codeText
+      c = product.getStringCode
       @autocomplete_codes.push c      
     end
   end
@@ -47,7 +47,7 @@ class PrintController < ApplicationController
     products = Product.all
     @description = Array.new
     products.each do |product|
-      index = @codes.index(product.codeNumber.to_s + product.codeText)
+      index = @codes.index(product.getStringCode)
       if index != nil
         @description.insert(index, product.description)  
       end

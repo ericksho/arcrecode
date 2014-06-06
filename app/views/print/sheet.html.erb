@@ -5,8 +5,9 @@
 <% for i in 1..@codeCount %>
 	<%if @codes.at(i).to_s != ''%>
 		<% 
-			barcode_value = @codes.at(i).to_s
-			img = Product.getImg barcode_value 
+			barcode_value = @codes.at(i).to_s 
+			barcode = barcode_value [0..-2]
+			img = Product.getImg barcode
 		%>
 
 		<td>

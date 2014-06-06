@@ -1,8 +1,25 @@
 class Product < ActiveRecord::Base
 
+	def self.getNextCode
+	    products = Product.all
+	    codes = Array.new
+
+	    products.each do |prod|
+	      codes.push prod.product
+	    end
+
+	    for i in 0..codes.max
+	    	unless codes.include? i
+	    		return i
+	    	end
+	    end
+
+	    codes.max + 1
+	end
+
 	def getBarcode
 
-		barcode_value = self.codeNumber.to_s + self.codeText
+		barcode_value = self.getArrayCode.join
 		Product.getImg barcode_value
 
 	end
@@ -16,14 +33,16 @@ class Product < ActiveRecord::Base
 		# Load libraries of barby.
 		require 'barby'
 		require 'barby/barcode/ean_13'
-		require 'barby/barcode/ean_8'
 		require 'barby/outputter/png_outputter'
 		 
-		#barcode = Barby::EAN13.new('491234567890')
-		barcode =Barby::EAN13.new('49123456789')
+		barcode =Barby::EAN13.new(barcode_value)
 
 		png = barcode.to_png(:margin => 3, :xdim => 1, :height => 55)
 		img = png.to_yaml.gsub('--- !binary |-','')
+	end
+
+	def getStringCode
+		(getArrayCode+[self.getVerifyDigit]).join
 	end
 
 	def getArrayCode
@@ -33,29 +52,29 @@ class Product < ActiveRecord::Base
 
 		case country.count
 		when 2
-			digits = [0] + country 
+			country = [0] + country 
 		when 1
-			digits = [0,0] + country
+			country = [0,0] + country
 		end
 
 		case enterprise.count
 		when 3
-			digits = [0] + enterprise 
+			enterprise = [0] + enterprise 
 		when 2
-			digits = [0,0] + enterprise
+			enterprise = [0,0] + enterprise
 		when 1 
-			digits = [0,0,0] + enterprise
+			enterprise = [0,0,0] + enterprise
 		end
 
 		case product.count
 		when 4
-			digits = [0] + product 
+			product = [0] + product 
 		when 3
-			digits = [0,0] + product
+			product = [0,0] + product
 		when 2 
-			digits = [0,0,0] + product
+			product = [0,0,0] + product
 		when 1 
-			digits = [0,0,0,0] + product
+			product = [0,0,0,0] + product
 		end
 
 		digits = country + enterprise + product

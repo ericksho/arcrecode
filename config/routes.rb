@@ -18,6 +18,8 @@ Arcrecode::Application.routes.draw do
   get 'admin/list', as: 'users_list'
   get 'admin/edit/:id', to: 'admin#edit', as: 'edit_user'
   post 'admin/delete_user', as: 'delete_user'
+  post 'products/index', as: 'filterProducts'
+  get 'products/index'
 
 
   devise_for :users

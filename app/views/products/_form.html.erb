@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-
+<h4>Código:</h4>
   <table class="table">
     <thead>
       <tr>
@@ -23,21 +23,21 @@
 
     <tbody>
       <tr>
-        <td><%= f.number_field :country, :value => '780', :disabled => true %></td>
-        <td><%= f.select :enterprise, [["Dais",0001],["Arcre",0002],["Armand",0003]]%></td>
-        <td><%= f.number_field :product, :min => 0, :max => 9999, :value => 02%></td>
+        <td><%= f.number_field :country, :value => 780, :readonly => false %></td>
+        <td><%= f.select :enterprise, [["Dais",0001],["Arcre",0002],["Armand",0003]],{}, :onChange=>"checkFilled();"%></td>
+        <td><%= f.number_field :product, :min => 0, :max => 9999, :value => @nextCode%></td>
         <td><%= f.text_field :verifyDigit, :value => '?', :disabled => true%></td>
       </tr>
     </tbody>
   </table>
 
-  <% p = Product.new() %>
-  <%= p.getVerifyDigit%>
-
-
   <div class="field">
-    <%= f.label "descripción" %>
+    <h4>Descripción:</h4>
     <%= f.text_field :description,:required => true, :placeholder => 'p.e. Destornillador de punta Sodimac' %>
+  </div>
+  <div class="field">
+    <h4>Código Original: </h4>
+    <%= f.text_field :original_code,:required => true, :placeholder => 'Codigo original del producto' %>
   </div>
   <div class="actions">
     <%= f.submit "Crear Producto"%>
@@ -45,10 +45,30 @@
 <% end %>
 
 
-<%= javascript_tag "var autocomplete_items = #{ @autocomplete_codes.to_json };" %>
-
 <script type="text/javascript">
-    jQuery(document).ready(function() {
-        $('#auto_complete').typeahead({source: autocomplete_items});
-    });
+    function checkFilled() 
+    {
+      var inputVal = document.getElementById("product_enterprise").value;
+      document.body.style.background="white";
+      if (inputVal == "1")
+      {
+          document.body.style.background="green";
+      }
+      else
+      {
+          if (inputVal == "2") 
+          {
+              document.body.style.background="#005C99";
+          }
+          else
+          {
+              if (inputVal == "3") 
+              {
+                  document.body.style.background="black";
+              }
+          }
+    }
+}
+ 
+checkFilled();
 </script>

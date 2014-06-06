@@ -7,6 +7,21 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+
+    if params.has_key?(:code)
+      code = params[:code]
+      @products.delete_if {|prod| !prod.getStringCode.include? code.to_s}
+    end  
+
+    if params.has_key?(:desc)
+      desc = params[:desc]
+      @products.delete_if {|prod| !prod.description.include? desc}
+    end
+
+    if params.has_key?(:orig)
+      orig = params[:orig]
+      @products.delete_if {|prod| !prod.original_code.include? orig}
+    end
   end
 
   # GET /products/1
@@ -17,8 +32,11 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @nextCode = Product.getNextCode
+
     products = Product.all
     @autocomplete_codes = Array.new
+
     products.each do |prod|
       @autocomplete_codes.push prod.product
     end
@@ -31,20 +49,20 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-
-    
-
     @product = Product.new(product_params)
+
+    @product.send('verifyDigit=' ,@product.getVerifyDigit)
+    
     unique = true;
 
-    products = Product.where(:product => @product.product)
-    if products.count > 1
-      products.each do |productT| 
-        if productT.codeText.eql? @product.codeText
-          unique = false;
-        end
-      end
-    end
+    #products = Product.where(:product => @product.product)
+    #if products.count > 1
+     # products.each do |productT| 
+      #  if productT.codeText.eql? @product.codeText
+       #   unique = false;
+        #end
+     # end
+    #end
 
     respond_to do |format|
       if unique 
@@ -96,6 +114,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:country, :enterprise, :description, :product, :verifyDigit)
+      params.require(:product).permit(:country, :enterprise, :description, :product, :verifyDigit,:code,:desc)
     end
 end

@@ -2,8 +2,9 @@
 	<%if @codes.at(i).to_s != ''%>
 
 		<% 
-			barcode_value = @codes.at(i).to_s
-			img = Product.getImg barcode_value 
+			barcode_value = @codes.at(i).to_s 
+			barcode = barcode_value [0..-2]
+			img = Product.getImg barcode
 		%>
 
 		</br>
@@ -14,6 +15,7 @@
 		<%= barcode_value %>
 		</br>
 		<strong>Código de Barras:</strong>
+		</br>
 		<%= image_tag "data:image/png;base64," + img %>
 		</br>
 

@@ -1,10 +1,36 @@
 <h1>Listado de Productos</h1>
 
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        <strong>Filtrar</strong>
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        <%= form_tag(filterProducts_path, method: "post") do %>
+          <%= label_tag(:code, "Código: ") %>
+          <%= text_field_tag(:code) %>
+          <%= label_tag(:desc, "Descripción: ") %>
+          <%= text_field_tag(:desc) %>
+          <%= label_tag(:orig, "Código Original: ") %>
+          <%= text_field_tag(:orig) %>
+          <%= submit_tag("Filtrar", class: 'btn') %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <table class="table table-hover table-striped">
   <thead>
     <tr>
-      <th>Codigo</th>
-      <th>Descriptión</th>
+      <th>Código</th>
+      <th>Descripción</th>
+      <th>Código Original</th>
       <th></th>
       <th></th>
       <th></th>
@@ -14,8 +40,9 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= product.codeNumber.to_s + product.codeText%></td>
+        <td><%= product.getStringCode%></td>
         <td><%= product.description %></td>
+        <td><%= product.original_code %></td>
         <td><%= button_to 'Ver Producto', product, class: 'btn btn-info btn-xs', :method => :get %></td>
         <td><%= button_to 'Editar Producto', edit_product_path(product), class: 'btn btn-success btn-xs', :method => :get %></td>
         <td><%= button_to 'Eliminar Producto', product, method: :delete, data: { confirm: 'Con esto eliminara el producto de forma permanente, esta seguro?' }, class: 'btn btn-danger btn-xs'%></td>
@@ -27,3 +54,7 @@
 <br>
 
 <%= link_to 'Insertar un nuevo producto', new_product_path %>
+
+<script type="text/javascript">
+$(".collapse").collapse()
+</script>
