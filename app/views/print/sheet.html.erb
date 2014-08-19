@@ -9,6 +9,32 @@
 	* top of the page, bumping all HTML content down.
 	*/
 	deployQZ();
+	checkFiles();
+
+
+	function checkFiles()
+	{
+	    exists('/qz/js/deployJava.js');
+	    exists('/js/deployJava.js');
+	    exists('qz/js/deployJava.js');
+	    exists('assets/qz/js/deployJava.js');
+	    exists('/assets/qz/js/deployJava.js');
+	}
+
+	function exists(url)
+	{
+	    var http = new XMLHttpRequest();
+	    http.open('HEAD', url, false);
+	    http.send();
+	    if ( http.status!=404)
+	    {
+	    	alert('encontramos al archivo' + url);
+	    }
+	    else
+	    {
+	    	alert('No encontramos'+ url);
+	    }
+	}
 	
 	/**
 	* Deploys different versions of the applet depending on Java version.
