@@ -14,7 +14,6 @@
 	* MANIFEST.MF TrustedLibrary=true discrepency between JRE6 and JRE7.
 	*/
 	function deployQZ() {
-		alert('deplyQZ');
 		var attributes = {id: "qz", code:'qz.PrintApplet.class', 
 			archive:'qz-print.jar', width:1, height:1};
 		var parameters = {jnlp_href: 'qz-print_jnlp.jnlp', 
@@ -32,6 +31,7 @@
 	* Automatically gets called when applet has loaded.
 	*/
 	function qzReady() {
+		alert('deplyQZ');
 		// Setup our global qz object
 		window["qz"] = document.getElementById('qz');
 		var title = document.getElementById("title");
