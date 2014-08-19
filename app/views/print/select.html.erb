@@ -1,82 +1,4 @@
-<script type="text/javascript" src="app/assets/qz/js/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="app/assets/qz/js/html2canvas.js"></script>
-<script type="text/javascript" src="app/assets/qz/js/jquery.plugin.html2canvas.js"></script>
-
-<h1>Selección para imprimir</h1>
-<p>Seleccione los códigos que desea imprimir</p>
-<%= form_tag print_sheet_p_path, :method=>'post',:target => "_blank"  do %>
-
-<table border="0" width="1024px">
-<col width="335">
-<tr>
-
-<%= hidden_field_tag 'codeCount', @codeCount %>
-	<% for i in 1..@codeCount %>
-		<td>
-			<%= label_tag 'inserte codigo ' + i.to_s %>
-			<%= select_tag "code_" + i.to_s, options_for_select(@autocomplete_codes), class: 'combobox', :include_blank => 'Escoga un codigo' %>
-		</td>
-
-		<% if i % 3 == 0 %>
-			<tr></tr>
-		<% end %>
-
-	<% end %>
-	
-	</tr>
-
-	</table>
-
-	<%=select_tag :printer, "<option>Seleccione una Impresora</option>".html_safe%>
-
-	<%= submit_tag 'Imprimir' %>
-
-	<input type="button" value="Imprimir2"
-onClick="javascript:printBarcodes();">
-<% end %>
-
-<script type="text/javascript" src="app/assets/qz/js/deployJava.js"></script>
-
-<script type="text/javascript">
-	/***************************************************************************
-	* Prototype function for printing raw ZPL commands
-	* Usage:
-	*    qz.append('^XA\n^FO50,50^ADN,36,20^FDHello World!\n^FS\n^XZ\n');
-	*    qz.print();
-	***************************************************************************/     
-	function printBarcodes() {
-		alert('printBarcodes'); 
-		if (notReady()) { return; }
-		alert('ready printBarcodes'); 
-		 
-		// Send characters/raw commands to qz using "append"
-		// This example is for ZPL.  Please adapt to your printer language
-		// Hint:  Carriage Return = \r, New Line = \n, Escape Double Quotes= \"
-		qz.append('^XA\n');
-        qz.append('^FO50,50^ADN,36,20^FDPRINTED USING QZ PRINT PLUGIN ' + qz.getVersion() + '\n');
-		qz.appendImage(getPath() + 'img/image_sample_bw.png', 'ZPLII');
-				
-		// Automatically gets called when "qz.appendImage()" is finished.
-		window['qzDoneAppending'] = function() {
-			// Append the rest of our commands
-			qz.append('^FS\n');
-			qz.append('^XZ\n');  
-			
-			// Tell the apple to print.
-			qz.print();
-			
-			// Remove any reference to this function
-			window['qzDoneAppending'] = null;
-		};
-	}
-</script>
-
-<script type="text/javascript">
-	$( document ).ready(function() {
-    listPrinters();
-});
-</script>
-
+<script type="text/javascript" src="assets/qz/js/deployJava.js"></script>
 <script type="text/javascript">
 	/**
 	* Optionally used to deploy multiple versions of the applet for mixed
@@ -84,42 +6,6 @@ onClick="javascript:printBarcodes();">
 	* top of the page, bumping all HTML content down.
 	*/
 	deployQZ();
-
-
-
-	/***************************************************************************
-	* Prototype function for listing all printers attached to the system
-	* Usage:
-	*    qz.findPrinter('\\{dummy_text\\}');
-	*    window['qzDoneFinding'] = function() { alert(qz.getPrinters()); };
-	***************************************************************************/
-	function listPrinters() {
-		     
-		if (isLoaded()) {
-			alert('loaded....listing '); 
-			// Searches for a locally installed printer with a bogus name
-			qz.findPrinter('\\{bogus_printer\\}');
-			
-			// Automatically gets called when "qz.findPrinter()" is finished.
-			window['qzDoneFinding'] = function() {
-				// Get the CSV listing of attached printers
-				var printers = qz.getPrinters().split(',');
-				for (i in printers) {
-					var select = document.getElementById("printer");
-					var el = document.createElement("option");
-
-			        el.textContent = printers[i] ? printers[i] : 'Unknown';
-			        el.value = printers[i] ? printers[i] : 'Unknown';
-			        select.appendChild(el);
-
-
-				}
-				
-				// Remove reference to this function
-				window['qzDoneFinding'] = null;
-			};
-		}
-	}
 	
 	/**
 	* Deploys different versions of the applet depending on Java version.
@@ -302,43 +188,6 @@ onClick="javascript:printBarcodes();">
 	}
 	
 	/***************************************************************************
-	* Prototype function for printing raw EPL commands
-	* Usage:
-	*    qz.append('\nN\nA50,50,0,5,1,1,N,"Hello World!"\n');
-	*    qz.print();
-	***************************************************************************/
-	function printEPL() {
-		if (notReady()) { return; }
-		 
-		// Send characters/raw commands to qz using "append"
-		// This example is for EPL.  Please adapt to your printer language
-		// Hint:  Carriage Return = \r, New Line = \n, Escape Double Quotes= \"
-		qz.append('\nN\n');            
-		qz.append('q609\n');
-		qz.append('Q203,26\n');
-		qz.append('B5,26,0,1A,3,7,152,B,"1234"\n');
-		qz.append('A310,26,0,3,1,1,N,"SKU 00000 MFG 0000"\n');
-		qz.append('A310,56,0,3,1,1,N,"QZ PRINT APPLET"\n');
-		qz.append('A310,86,0,3,1,1,N,"TEST PRINT SUCCESSFUL"\n');
-		qz.append('A310,116,0,3,1,1,N,"FROM SAMPLE.HTML"\n');
-		qz.append('A310,146,0,3,1,1,N,"QZINDUSTRIES.COM"\n');
-		qz.appendImage(getPath() + 'img/image_sample_bw.png', 'EPL', 150, 300);
-				
-		// Automatically gets called when "qz.appendImage()" is finished.
-		window['qzDoneAppending'] = function() {
-			// Append the rest of our commands
-			qz.append('\nP1,1\n');
-			
-			// Tell the applet to print.
-			qz.print();
-			
-			// Remove reference to this function
-			window['qzDoneAppending'] = null;
-		};
-	 }
-	
-	
-	/***************************************************************************
 	****************************************************************************
 	* *                          HELPER FUNCTIONS                             **
 	****************************************************************************
@@ -386,6 +235,131 @@ onClick="javascript:printBarcodes();">
 	  }
 	}
 </script>
+	<script type="text/javascript" src="assets/qz/js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="assets/qz/js/html2canvas.js"></script>
+	<script type="text/javascript" src="assets/qz/js/jquery.plugin.html2canvas.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1>Selección para imprimir</h1>
+<p>Seleccione los códigos que desea imprimir</p>
+<%= form_tag print_sheet_p_path, :method=>'post',:target => "_blank"  do %>
+
+<table border="0" width="1024px">
+<col width="335">
+<tr>
+
+<%= hidden_field_tag 'codeCount', @codeCount %>
+	<% for i in 1..@codeCount %>
+		<td>
+			<%= label_tag 'inserte codigo ' + i.to_s %>
+			<%= select_tag "code_" + i.to_s, options_for_select(@autocomplete_codes), class: 'combobox', :include_blank => 'Escoga un codigo' %>
+		</td>
+
+		<% if i % 3 == 0 %>
+			<tr></tr>
+		<% end %>
+
+	<% end %>
+	
+	</tr>
+
+	</table>
+
+	<%=select_tag :printer, "<option>Seleccione una Impresora</option>".html_safe%>
+
+	<%= submit_tag 'Imprimir' %>
+
+	<input type="button" value="Imprimir2"
+onClick="javascript:printBarcodes();">
+<% end %>	
+
+<script type="text/javascript">
+	/***************************************************************************
+	* Prototype function for printing raw ZPL commands
+	* Usage:
+	*    qz.append('^XA\n^FO50,50^ADN,36,20^FDHello World!\n^FS\n^XZ\n');
+	*    qz.print();
+	***************************************************************************/     
+	function printBarcodes() {
+		alert('printBarcodes'); 
+		if (notReady()) { return; }
+		alert('ready printBarcodes'); 
+		 
+		// Send characters/raw commands to qz using "append"
+		// This example is for ZPL.  Please adapt to your printer language
+		// Hint:  Carriage Return = \r, New Line = \n, Escape Double Quotes= \"
+		qz.append('^XA\n');
+        qz.append('^FO50,50^ADN,36,20^FDPRINTED USING QZ PRINT PLUGIN ' + qz.getVersion() + '\n');
+		qz.appendImage(getPath() + 'img/image_sample_bw.png', 'ZPLII');
+				
+		// Automatically gets called when "qz.appendImage()" is finished.
+		window['qzDoneAppending'] = function() {
+			// Append the rest of our commands
+			qz.append('^FS\n');
+			qz.append('^XZ\n');  
+			
+			// Tell the apple to print.
+			qz.print();
+			
+			// Remove any reference to this function
+			window['qzDoneAppending'] = null;
+		};
+	}
+</script>
+
+<script type="text/javascript">
+	$( document ).ready(function() {
+    listPrinters();
+});
+</script>
+
+<script type="text/javascript">
+	/***************************************************************************
+	* Prototype function for listing all printers attached to the system
+	* Usage:
+	*    qz.findPrinter('\\{dummy_text\\}');
+	*    window['qzDoneFinding'] = function() { alert(qz.getPrinters()); };
+	***************************************************************************/
+	function listPrinters() {
+		     
+		if (isLoaded()) {
+			alert('loaded....listing '); 
+			// Searches for a locally installed printer with a bogus name
+			qz.findPrinter('\\{bogus_printer\\}');
+			
+			// Automatically gets called when "qz.findPrinter()" is finished.
+			window['qzDoneFinding'] = function() {
+				// Get the CSV listing of attached printers
+				var printers = qz.getPrinters().split(',');
+				for (i in printers) {
+					var select = document.getElementById("printer");
+					var el = document.createElement("option");
+
+			        el.textContent = printers[i] ? printers[i] : 'Unknown';
+			        el.value = printers[i] ? printers[i] : 'Unknown';
+			        select.appendChild(el);
+
+
+				}
+				
+				// Remove reference to this function
+				window['qzDoneFinding'] = null;
+			};
+		}
+	}
+</script>
+
 
 <script type="text/javascript">
   $(document).ready(function(){
