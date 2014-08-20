@@ -1,7 +1,7 @@
 <html>
 <!-- License:  LGPL 2.1 or QZ INDUSTRIES SOURCE CODE LICENSE -->
 <head><title>QZ Print Plugin</title>
-<script type="text/javascript" src="/qz/js/deployJava.js"></script>
+<script type="text/javascript" src="/js/deployJava.js"></script>
 <script type="text/javascript">
 	/**
 	* Optionally used to deploy multiple versions of the applet for mixed
@@ -9,32 +9,6 @@
 	* top of the page, bumping all HTML content down.
 	*/
 	deployQZ();
-	checkFiles();
-
-
-	function checkFiles()
-	{
-	    exists('/qz/js/deployJava.js');
-	    exists('/js/deployJava.js');
-	    exists('qz/js/deployJava.js');
-	    exists('assets/qz/js/deployJava.js');
-	    exists('/assets/qz/js/deployJava.js');
-	}
-
-	function exists(url)
-	{
-	    var http = new XMLHttpRequest();
-	    http.open('HEAD', url, false);
-	    http.send();
-	    if ( http.status!=404)
-	    {
-	    	alert('encontramos al archivo' + url);
-	    }
-	    else
-	    {
-	    	alert('No encontramos'+ url);
-	    }
-	}
 	
 	/**
 	* Deploys different versions of the applet depending on Java version.
@@ -44,14 +18,14 @@
 	*/
 	function deployQZ() {
 		var attributes = {id: "qz", code:'qz.PrintApplet.class', 
-			archive:'/qz/qz-print.jar', width:1, height:1};
-		var parameters = {jnlp_href: '/qz/qz-print_jnlp.jnlp', 
+			archive:'/qz-print.jar', width:1, height:1};
+		var parameters = {jnlp_href: '/qz-print_jnlp.jnlp', 
 			cache_option:'plugin', disable_logging:'false', 
 			initial_focus:'false'};
 		if (deployJava.versionCheck("1.7+") == true) {}
 		else if (deployJava.versionCheck("1.6+") == true) {
-			attributes['archive'] = '/qz/jre6/qz-print.jar';
-			parameters['jnlp_href'] = '/qz/jre6/qz-print_jnlp.jnlp';
+			attributes['archive'] = '/jre6/qz-print.jar';
+			parameters['jnlp_href'] = '/jre6/qz-print_jnlp.jnlp';
 		}
 		deployJava.runApplet(attributes, parameters, '1.5');
 	}
@@ -968,9 +942,9 @@
 	  }
 	}
 </script>
-	<script type="text/javascript" src="/qz/js/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="/qz/js/html2canvas.js"></script>
-	<script type="text/javascript" src="/qz/js/jquery.plugin.html2canvas.js"></script>
+	<script type="text/javascript" src="/js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="/js/html2canvas.js"></script>
+	<script type="text/javascript" src="/js/jquery.plugin.html2canvas.js"></script>
 	</head>
 	<body id="content" bgcolor="#FFF380">
 	<div style="position:absolute;top:0;left:5;"><h1 id="title">QZ Print Plugin</h1></div><br /><br /><br />
@@ -1045,7 +1019,6 @@
 	<input type="button" onClick="allowMultiple()" value="Allow Multiple Applets" /><br /></td></tr></table>
 	</body><canvas id="hidden_screenshot" style="display:none;"></canvas>
 </html>
-
 
 <table border="0" width="700px">
 <col width="335">
