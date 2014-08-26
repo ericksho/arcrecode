@@ -14,7 +14,7 @@ class Product < ActiveRecord::Base
 		end
 
 	    for i in 0..i2
-	    	unless codes.include? i
+	    	unless codes.include?
 	    		return i
 	    	end
 	    end
