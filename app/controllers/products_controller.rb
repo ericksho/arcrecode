@@ -44,6 +44,8 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    @nextCode = @product.product.to_i
+    @origiinalCode = @product.original_code
   end
 
   # POST /products
@@ -114,6 +116,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:country, :enterprise, :description, :product, :verifyDigit,:code,:desc)
+      params.require(:product).permit(:country, :original_code, :enterprise, :description, :product, :verifyDigit,:code,:desc)
     end
 end

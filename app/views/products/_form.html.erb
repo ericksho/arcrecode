@@ -23,9 +23,9 @@
 
     <tbody>
       <tr>
-        <td><%= f.number_field :country, :value => 780, :readonly => false %></td>
+        <td><%= f.number_field :country,:required => true, :value => 780, :readonly => false %></td>
         <td><%= f.select :enterprise, [["Dais",0001],["Arcre",0002],["Armand",0003]],{}, :onChange=>"checkFilled();"%></td>
-        <td><%= f.number_field :product, :min => 0, :max => 9999, :value => @nextCode%></td>
+        <td><%= f.number_field :product,:required => true, :min => 0, :max => 9999, :value => @nextCode%></td>
         <td><%= f.text_field :verifyDigit, :value => '?', :disabled => true%></td>
       </tr>
     </tbody>
@@ -37,7 +37,7 @@
   </div>
   <div class="field">
     <h4>Código Original: </h4>
-    <%= f.text_field :original_code,:required => true, :placeholder => 'Codigo original del producto' %>
+    <%= f.text_field :original_code,:required => true, :placeholder => 'Codigo original del producto', :value => @origiinalCode %>
   </div>
   <div class="actions">
     <%= f.submit "Crear Producto"%>
