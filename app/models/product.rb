@@ -8,7 +8,12 @@ class Product < ActiveRecord::Base
 	      codes.push prod.product
 	    end
 
-	    for i in 0..codes.max
+		i2 = codes.max
+		if i2.nil?
+			i2 = 0;
+		end
+
+	    for i in 0..i2
 	    	unless codes.include? i
 	    		return i
 	    	end
