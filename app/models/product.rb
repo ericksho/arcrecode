@@ -14,12 +14,12 @@ class Product < ActiveRecord::Base
 		end
 
 	    for i in 0..i2
-	    	unless codes.include?
+	    	unless codes.include? i
 	    		return i
 	    	end
 	    end
 
-	    codes.max + 1
+	    i2 + 1
 	end
 
 	def getBarcode
