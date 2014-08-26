@@ -2,7 +2,7 @@
 <p>Seleccione los códigos que desea imprimir</p>
 <%= form_tag print_sheet_p_path, :method=>'post',:target => "_blank"  do %>
 
-<table border="0" width="1024px">
+<table border="0" width="700px">
 <col width="335">
 <tr>
 
@@ -13,7 +13,7 @@
 			<%= select_tag "code_" + i.to_s, options_for_select(@autocomplete_codes), class: 'combobox', :include_blank => 'Escoga un codigo' %>
 		</td>
 
-		<% if i % 3 == 0 %>
+		<% if i % 2 == 0 %>
 			<tr></tr>
 		<% end %>
 
@@ -23,11 +23,10 @@
 
 	</table>
 
-	<%=select_tag :printer, "<option>Seleccione una Impresora</option>".html_safe%>
-
 	<%= submit_tag 'Imprimir' %>
+<% end %>
 
-<% end %>	
+
 
 <script type="text/javascript">
   $(document).ready(function(){
