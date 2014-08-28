@@ -57,7 +57,9 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
-    @nextCode = Product.getNextCode
+    @nextCodeDais = Product.getNextCode("1")
+    @nextCodeArcre = Product.getNextCode("2")
+    @nextCodeArmand = Product.getNextCode("3")
 
     products = Product.all
     @autocomplete_codes = Array.new

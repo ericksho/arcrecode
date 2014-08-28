@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
 
-	def self.getNextCode
-	    products = Product.all
+	def self.getNextCode(enterprise)
+	    products = Product.where("enterprise = " + enterprise)
 	    codes = Array.new
 
 	    products.each do |prod|

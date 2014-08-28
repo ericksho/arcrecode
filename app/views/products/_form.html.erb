@@ -25,7 +25,7 @@
       <tr>
         <td><%= f.number_field :country,:required => true, :value => 780, :readonly => false %></td>
         <td><%= f.select :enterprise, [["Dais",0001],["Arcre",0002],["Armand",0003]],{}, :onChange=>"checkFilled();"%></td>
-        <td><%= f.number_field :product,:required => true, :min => 0, :max => 9999, :value => @nextCode%></td>
+        <td><%= f.number_field :product,:required => true, :min => 0, :max => 9999, :value => @nextCodeDais%></td>
         <td><%= f.text_field :verifyDigit, :value => '?', :disabled => true%></td>
       </tr>
     </tbody>
@@ -53,18 +53,21 @@
       if (inputVal == "1")
       {
           document.body.style.background="green";
+          document.getElementById("product_product").value = '<%=@nextCodeDais%>';
       }
       else
       {
           if (inputVal == "2") 
           {
               document.body.style.background="#005C99";
+              document.getElementById("product_product").value = '<%=@nextCodeArcre%>';
           }
           else
           {
               if (inputVal == "3") 
               {
                   document.body.style.background="black";
+                  document.getElementById("product_product").value = '<%=@nextCodeArmand%>';
               }
           }
     }
