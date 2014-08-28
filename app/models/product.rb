@@ -22,6 +22,21 @@ class Product < ActiveRecord::Base
 	    i2 + 1
 	end
 
+	def getEnterprise
+		ent = ''
+		case self.enterprise
+		when 1
+			ent = 'Dais'
+		when 2
+			ent = 'Arcre'
+		when 3 
+			ent = 'Armand'
+		end
+		ent
+				
+				
+	end
+
 	def getBarcode
 
 		barcode_value = self.getArrayCode.join
