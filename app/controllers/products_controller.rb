@@ -6,21 +6,46 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.all    
 
     if params.has_key?(:code)
-      code = params[:code]
-      @products.delete_if {|prod| !prod.getStringCode.include? code.to_s}
+      @code = params[:code]
+      @products.delete_if {|prod| !prod.getStringCode.include? @code.to_s}
     end  
 
     if params.has_key?(:desc)
-      desc = params[:desc]
-      @products.delete_if {|prod| !prod.description.include? desc}
+      @desc = params[:desc]
+      @products.delete_if {|prod| !prod.description.include? @desc}
     end
 
     if params.has_key?(:orig)
-      orig = params[:orig]
-      @products.delete_if {|prod| !prod.original_code.include? orig}
+      @orig = params[:orig]
+      @products.delete_if {|prod| !prod.original_code.include? @orig}
+    end
+
+    if params.has_key?(:filter)
+      @dais = true;
+      @arcre = true;
+      @armand = true;
+      ## filtramos las empresas
+      if !params.has_key?(:dais)
+        @products.delete_if {|prod| prod.enterprise == 1}
+        @dais = false;
+      end  
+
+      if !params.has_key?(:arcre)
+        @products.delete_if {|prod| prod.enterprise == 2}
+        @arcre = false;
+      end  
+
+      if !params.has_key?(:armand)
+        @products.delete_if {|prod| prod.enterprise == 3}
+        @armand = false;
+      end
+    else
+      @dais = true;
+      @arcre = true;
+      @armand = true;
     end
   end
 
@@ -116,6 +141,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:country, :original_code, :enterprise, :description, :product, :verifyDigit,:code,:desc)
+      params.require(:product).permit(:country, :original_code, :enterprise, :description, :product, :verifyDigit,:code,:desc, :orig, :dais, :arcre, :armand, :filter)
     end
 end

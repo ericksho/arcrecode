@@ -11,11 +11,26 @@
       <div class="accordion-inner">
         <%= form_tag(filterProducts_path, method: "post") do %>
           <%= label_tag(:code, "Código: ") %>
-          <%= text_field_tag(:code) %>
+          <%= text_field_tag(:code, @code) %>
           <%= label_tag(:desc, "Descripción: ") %>
-          <%= text_field_tag(:desc) %>
+          <%= text_field_tag(:desc, @desc) %>
           <%= label_tag(:orig, "Código Original: ") %>
-          <%= text_field_tag(:orig) %>
+          <%= text_field_tag(:orig, @orig) %>
+          </br>
+          <div class="form-inline">
+            <%= check_box_tag(:dais, :dais, @dais) %>
+            <%= label_tag(:dais, "Dais") %>
+          </div>
+          <div class="form-inline">
+            <%= check_box_tag(:arcre, :arcre, @arcre)%>
+            <%= label_tag(:arcre, "Arcre") %>
+          </div>
+          <div class="form-inline">
+            <%= check_box_tag(:armand, :armand, @armand) %>
+            <%= label_tag(:armand, "Armand") %>
+          </div>
+          <%= hidden_field_tag(:filter, true)%>
+          </br>
           <%= submit_tag("Filtrar", class: 'btn') %>
         <% end %>
       </div>
