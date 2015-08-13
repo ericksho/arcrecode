@@ -1,0 +1,30 @@
+dos etiquetas, 
+codigo producto
+3 digitos para producto
+2 digitos para envasado
+
+codigo lote
+fecha de elaboración {4}
+fecha de vencimiento (Meses duración) [12, 18 y 24] {2}
+producto [desplegable fijo] {3}
+lote correlativo del día [1-3] {1}
+uso interno {2}
+
+arcre221
+
+Etiqueta código (pequeñas) 3.3 x 2.2
+
+granasur.cl
+naturaloils.cl
+
+%%%%%%%% TO DO %%%%%%%%%%
+
+Producto
+	Crear Producto
+	Productos
+	Imprimir Codigos
+	Imprimir Muestras
+	Administrador 
+
+	cambiamos Dais por GrainOils
+Lote

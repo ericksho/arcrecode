@@ -1,0 +1,31 @@
+<h1>Listado Tipos de Producto</h1>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Orgánico</th>
+      <th>Codigo</th>
+      <th>Nombre</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @product_types.each do |product_type| %>
+      <tr>
+        <td><%= product_type.organic %></td>
+        <td><%= product_type.code %></td>
+        <td><%= product_type.name %></td>
+        <td><%= link_to 'Mostrar', product_type, class: 'btn btn-info btn-xs', :method => :get %></td>
+        <td><%= link_to 'Editar', edit_product_type_path(product_type), class: 'btn btn-success btn-xs', :method => :get %></td>
+        <td><%= link_to 'Eliminar', product_type, method: :delete, data: { confirm: 'Está seguro?' }, class: 'btn btn-danger btn-xs'%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Tipo de Producto', new_product_type_path %>

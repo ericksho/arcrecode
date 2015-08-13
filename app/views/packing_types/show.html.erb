@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @packing_type.amount %>
+</p>
+
+<p>
+  <strong>Medida:</strong>
+  <%= @packing_type.measure %>
+</p>
+
+<p>
+  <strong>Código:</strong>
+  <%= @packing_type.code %>
+</p>
+
+<%= link_to 'Editar', edit_packing_type_path(@packing_type) %> |
+<%= link_to 'Volver', packing_types_path %>

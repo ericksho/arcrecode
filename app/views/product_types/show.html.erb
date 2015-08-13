@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Es orgánico:</strong>
+  <%= @product_type.organic %>
+</p>
+
+<p>
+  <strong>Codigo:</strong>
+  <%= @product_type.code %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @product_type.name %>
+</p>
+
+<%= link_to 'Editar', edit_product_type_path(@product_type) %> |
+<%= link_to 'Volver', product_types_path %>

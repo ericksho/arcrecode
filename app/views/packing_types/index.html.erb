@@ -1,0 +1,31 @@
+<h1>Listado de Tipo de Envasado</h1>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Medida</th>
+      <th>Cantidad</th>
+      <th>Código</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @packing_types.each do |packing_type| %>
+      <tr>
+        <td><%= packing_type.measure %></td>
+        <td><%= packing_type.amount %></td>
+        <td><%= packing_type.code %></td>
+        <td><%= link_to 'Mostrar', packing_type, class: 'btn btn-info btn-xs', :method => :get %></td>
+        <td><%= link_to 'Editar', edit_packing_type_path(packing_type), class: 'btn btn-success btn-xs', :method => :get %></td>
+        <td><%= link_to 'Eliminar', packing_type, method: :delete, data: { confirm: 'Está seguro?' }, class: 'btn btn-danger btn-xs'%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Tipo de Envasado', new_packing_type_path %>

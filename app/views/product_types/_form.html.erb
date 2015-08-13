@@ -1,0 +1,29 @@
+<%= form_for(@product_type) do |f| %>
+  <% if @product_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product_type.errors.count, "error") %> prohibited this product_type from being saved:</h2>
+
+      <ul>
+      <% @product_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Es orgánico" %><br>
+    <%= f.check_box :organic %>
+  </div>
+  <div class="field">
+    <%= f.label :Código %><br>
+    <%= f.number_field :code,:required => true, :min => 0, :max => 999 %>
+  </div>
+  <div class="field">
+    <%= f.label :Nombre %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Crear Tipo Producto", class: 'btn'%>
+  </div>
+<% end %>

@@ -1,5 +1,9 @@
 Arcrecode::Application.routes.draw do
 
+  resources :packing_types
+
+  resources :product_types
+
   get "admin/list"
   get "admin/edit"
   get "admin/new"

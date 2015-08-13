@@ -1,0 +1,29 @@
+<%= form_for(@packing_type) do |f| %>
+  <% if @packing_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@packing_type.errors.count, "error") %> prohibited this packing_type from being saved:</h2>
+
+      <ul>
+      <% @packing_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Medida %><br>
+    <%= f.select :measure, [["Kg",:"Kg"],["Lts","Lts"],["ml","ml"]],{}%>
+  </div>
+  <div class="field">
+    <%= f.label :Cantidad %><br>
+    <%= f.number_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label :Código %><br>
+    <%= f.number_field :code, :required => true, :min => 0, :max => 99 %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Crear Tipo de Envasado", class: 'btn'%>
+  </div>
+<% end %>
