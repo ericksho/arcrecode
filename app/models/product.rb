@@ -1,36 +1,10 @@
 class Product < ActiveRecord::Base
 
-	def self.getNextCode(enterprise)
-	    products = Product.where("enterprise = " + enterprise)
-	    codes = Array.new
-
-	    products.each do |prod|
-	      codes.push prod.product
-	    end
-
-		i2 = codes.max
-		if i2.nil?
-			i2 = 0;
-		end
-
-	    for i in 0..i2
-	    	unless codes.include? i
-	    		return i
-	    	end
-	    end
-
-	    i2 + 1
-	end
-
 	def getEnterprise
 		ent = ''
 		case self.enterprise
 		when 1
-			ent = 'Dais'
-		when 2
-			ent = 'Arcre'
-		when 3 
-			ent = 'Armand'
+			ent = 'GrainOils'
 		end
 		ent
 				
@@ -68,7 +42,8 @@ class Product < ActiveRecord::Base
 	def getArrayCode
 		country = self.country.to_s.scan(/\d/).map { |x| x.to_i }
 		enterprise = self.enterprise.to_s.scan(/\d/).map { |x| x.to_i }
-		product = self.product.to_s.scan(/\d/).map { |x| x.to_i }
+		product_type = self.product_type_id.to_s.scan(/\d/).map { |x| x.to_i }
+		package_type = self.packing_type_id.to_s.scan(/\d/).map { |x| x.to_i }
 
 		case country.count
 		when 2
@@ -86,18 +61,19 @@ class Product < ActiveRecord::Base
 			enterprise = [0,0,0] + enterprise
 		end
 
-		case product.count
-		when 4
-			product = [0] + product 
-		when 3
-			product = [0,0] + product
+		case product_type.count
 		when 2 
-			product = [0,0,0] + product
+			product_type = [0] + product_type
 		when 1 
-			product = [0,0,0,0] + product
+			product_type = [0,0] + product_type
 		end
 
-		digits = country + enterprise + product
+		case package_type.count
+		when 1 
+			package_type = [0] + package_type
+		end
+
+		digits = country + enterprise + product_type + package_type
 	end
 	
 	def getVerifyDigit 

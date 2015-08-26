@@ -20,11 +20,11 @@ naturaloils.cl
 %%%%%%%% TO DO %%%%%%%%%%
 
 Producto
-	Crear Producto
-	Productos
 	Imprimir Codigos
 	Imprimir Muestras
-	Administrador 
-
-	cambiamos Dais por GrainOils
+	
 Lote
+	Crear lote
+	mostrar lotes
+	imprimir lotes
+	imprimir muestras

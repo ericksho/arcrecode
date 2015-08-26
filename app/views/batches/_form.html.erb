@@ -1,0 +1,43 @@
+<%= form_for(@batch) do |f| %>
+  <% if @batch.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@batch.errors.count, "error") %> prohibited this batch from being saved:</h2>
+
+      <ul>
+      <% @batch.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Fecha de elaboración</th>
+        <th>Duración (meses)</th>
+        <th>Lote Diario</th>
+        <th>Dígito de uso interno 1</th>
+        <th>Dígito de uso interno 2</th>
+        <th>Dígito Verificador</th>
+        <th>Descripción </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= f.number_field :elaboration_date %></td>
+        <td><%= f.number_field :lifespan, :style => "width:50px;"%></td>
+        <td><%= f.number_field :daily_batch %></td>
+        <td><%= f.number_field :intern_use_1, :style => "width:50px;"%></td>
+        <td><%= f.number_field :intern_use_2, :style => "width:50px;"%></td>
+        <td><%= f.number_field :verify_digit, :style => "width:50px;"%></td>
+        <td><%= f.text_field :description %></td>
+  </div>
+    </tr>
+      </tbody>
+    </table>
+
+  <div class="actions">
+    <%= f.submit "Crear Lote", class: 'btn'%>
+  </div>
+<% end %>

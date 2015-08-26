@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812235542) do
+ActiveRecord::Schema.define(version: 20150826021324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "batches", force: true do |t|
+    t.integer  "elaboration_date"
+    t.integer  "lifespan"
+    t.integer  "daily_batch"
+    t.integer  "intern_use_1"
+    t.integer  "intern_use_2"
+    t.integer  "verify_digit"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "packing_types", force: true do |t|
     t.integer  "amount"
@@ -38,10 +50,13 @@ ActiveRecord::Schema.define(version: 20150812235542) do
     t.datetime "updated_at"
     t.integer  "country"
     t.integer  "enterprise"
-    t.integer  "product"
     t.integer  "verifyDigit"
-    t.string   "original_code"
+    t.integer  "product_type_id"
+    t.integer  "packing_type_id"
   end
+
+  add_index "products", ["packing_type_id"], name: "index_products_on_packing_type_id", using: :btree
+  add_index "products", ["product_type_id"], name: "index_products_on_product_type_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",       null: false

@@ -18,34 +18,15 @@ class ProductsController < ApplicationController
       @products.delete_if {|prod| !prod.description.include? @desc}
     end
 
-    if params.has_key?(:orig)
-      @orig = params[:orig]
-      @products.delete_if {|prod| !prod.original_code.include? @orig}
-    end
-
     if params.has_key?(:filter)
-      @dais = true;
-      @arcre = true;
-      @armand = true;
+      @organic = true;
       ## filtramos las empresas
-      if !params.has_key?(:dais)
+      if !params.has_key?(:organic)
         @products.delete_if {|prod| prod.enterprise == 1}
-        @dais = false;
+        @organic = false;
       end  
-
-      if !params.has_key?(:arcre)
-        @products.delete_if {|prod| prod.enterprise == 2}
-        @arcre = false;
-      end  
-
-      if !params.has_key?(:armand)
-        @products.delete_if {|prod| prod.enterprise == 3}
-        @armand = false;
-      end
     else
-      @dais = true;
-      @arcre = true;
-      @armand = true;
+      @organic = true;
     end
   end
 
@@ -57,22 +38,19 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
-    @nextCodeDais = Product.getNextCode("1")
-    @nextCodeArcre = Product.getNextCode("2")
-    @nextCodeArmand = Product.getNextCode("3")
-
+    
     products = Product.all
     @autocomplete_codes = Array.new
 
     products.each do |prod|
-      @autocomplete_codes.push prod.product
+      @autocomplete_codes.push prod.product_type_id
     end
   end
 
   # GET /products/1/edit
   def edit
     @nextCode = @product.product.to_i
-    @origiinalCode = @product.original_code
+    @originalCode = @product.original_code
   end
 
   # POST /products
@@ -143,6 +121,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:country, :original_code, :enterprise, :description, :product, :verifyDigit,:code,:desc, :orig, :dais, :arcre, :armand, :filter)
+      params.require(:product).permit(:country, :enterprise, :description, :product_type_id, :packing_type_id, :verifyDigit,:code,:desc, :organic, :filter)
     end
 end

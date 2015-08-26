@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  elaboration_date: 1
+  lifespan: 1
+  daily_batch: 1
+  intern_use_1: 1
+  intern_use_2: 1
+  verify_digit: 1
+  description: MyString
+
+two:
+  elaboration_date: 1
+  lifespan: 1
+  daily_batch: 1
+  intern_use_1: 1
+  intern_use_2: 1
+  verify_digit: 1
+  description: MyString

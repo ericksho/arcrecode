@@ -16,16 +16,18 @@
       <tr>
         <th>País</th>
         <th>Empresa</th>
-        <th>Producto</th>
+        <th>Tipo Producto</th>
+        <th>Tipo Envasado</th>
         <th>Digito Verificador</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td><%= f.number_field :country,:required => true, :value => 780, :readonly => false %></td>
+        <td><%= f.number_field :country,:required => true, :value => 780, :readonly => true %></td>
         <td><%= f.select :enterprise, [["GrainOils",0001]]%></td>
-        <td><%= f.number_field :product, :required => true, :min => 0, :max => 9999, :value => @nextCodeDais%></td>
+        <td><%= f.collection_select :product_type_id, ProductType.all, :id, :name%>
+        <td><%= f.collection_select :packing_type_id, PackingType.all, :id, :description%>
         <td><%= f.text_field :verifyDigit, :value => '?', :disabled => true%></td>
       </tr>
     </tbody>
@@ -33,12 +35,9 @@
 
   <div class="field">
     <h4>Descripción:</h4>
-    <%= f.text_field :description,:required => true, :placeholder => 'p.e. Destornillador de punta Sodimac' %>
+    <%= f.text_field :description,:required => true, :placeholder => 'Esto se usa?' %>
   </div>
-  <div class="field">
-    <h4>Código Original: </h4>
-    <%= f.text_field :original_code,:required => true, :placeholder => 'Codigo original del producto', :value => @origiinalCode %>
-  </div>
+
   <div class="actions">
     <%= f.submit "Crear Producto", class: 'btn'%>
   </div>

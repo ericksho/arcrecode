@@ -3,8 +3,8 @@
 <table class="table table-hover table-striped">
   <thead>
     <tr>
-      <th>Medida</th>
       <th>Cantidad</th>
+      <th>Medida</th>
       <th>Código</th>
       <th></th>
       <th></th>
@@ -15,8 +15,8 @@
   <tbody>
     <% @packing_types.each do |packing_type| %>
       <tr>
-        <td><%= packing_type.measure %></td>
         <td><%= packing_type.amount %></td>
+        <td><%= packing_type.measure %></td>
         <td><%= packing_type.code %></td>
         <td><%= link_to 'Mostrar', packing_type, class: 'btn btn-info btn-xs', :method => :get %></td>
         <td><%= link_to 'Editar', edit_packing_type_path(packing_type), class: 'btn btn-success btn-xs', :method => :get %></td>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Elaboration date:</strong>
+  <%= @batch.elaboration_date %>
+</p>
+
+<p>
+  <strong>Lifespan:</strong>
+  <%= @batch.lifespan %>
+</p>
+
+<p>
+  <strong>Daily batch:</strong>
+  <%= @batch.daily_batch %>
+</p>
+
+<p>
+  <strong>Intern use 1:</strong>
+  <%= @batch.intern_use_1 %>
+</p>
+
+<p>
+  <strong>Intern use 2:</strong>
+  <%= @batch.intern_use_2 %>
+</p>
+
+<p>
+  <strong>Verify digit:</strong>
+  <%= @batch.verify_digit %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @batch.description %>
+</p>
+
+<%= link_to 'Edit', edit_batch_path(@batch) %> |
+<%= link_to 'Back', batches_path %>

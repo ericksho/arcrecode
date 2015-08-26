@@ -1,0 +1,39 @@
+<h1>Listing batches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Elaboration date</th>
+      <th>Lifespan</th>
+      <th>Daily batch</th>
+      <th>Intern use 1</th>
+      <th>Intern use 2</th>
+      <th>Verify digit</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @batches.each do |batch| %>
+      <tr>
+        <td><%= batch.elaboration_date %></td>
+        <td><%= batch.lifespan %></td>
+        <td><%= batch.daily_batch %></td>
+        <td><%= batch.intern_use_1 %></td>
+        <td><%= batch.intern_use_2 %></td>
+        <td><%= batch.verify_digit %></td>
+        <td><%= batch.description %></td>
+        <td><%= link_to 'Show', batch %></td>
+        <td><%= link_to 'Edit', edit_batch_path(batch) %></td>
+        <td><%= link_to 'Destroy', batch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Batch', new_batch_path %>

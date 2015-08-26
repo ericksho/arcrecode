@@ -1,8 +1,12 @@
 Arcrecode::Application.routes.draw do
 
+  resources :batches
+
   resources :packing_types
 
   resources :product_types
+
+  #resources :batches
 
   get "admin/list"
   get "admin/edit"
