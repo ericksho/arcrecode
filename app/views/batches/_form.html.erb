@@ -1,7 +1,7 @@
 <%= form_for(@batch) do |f| %>
   <% if @batch.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@batch.errors.count, "error") %> prohibited this batch from being saved:</h2>
+      <h2><%= pluralize(@batch.errors.count, "error") %> no permite(n) guardar el lote:</h2>
 
       <ul>
       <% @batch.errors.full_messages.each do |msg| %>
@@ -11,31 +11,54 @@
     </div>
   <% end %>
 
-  <table class="table">
+  <table class="table table-hover table-striped">
     <thead>
       <tr>
-        <th>Fecha de elaboración</th>
-        <th>Duración (meses)</th>
+        <th colspan="3">Fecha de Elaboración</th>
+        <th>Duración</th>
+        <th>Tipo de Producto</th>
         <th>Lote Diario</th>
-        <th>Dígito de uso interno 1</th>
-        <th>Dígito de uso interno 2</th>
+        <th colspan="2">Dígito de uso interno</th>
         <th>Dígito Verificador</th>
-        <th>Descripción </th>
+      </tr>
+      <tr>
+        <th>Día</th>
+        <th>Mes</th>
+        <th>Año</th>
+        <th>(meses)</th>
+        <th></th>
+        <th>1</th>
+        <th>2</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><%= f.number_field :elaboration_date %></td>
-        <td><%= f.number_field :lifespan, :style => "width:50px;"%></td>
-        <td><%= f.number_field :daily_batch %></td>
-        <td><%= f.number_field :intern_use_1, :style => "width:50px;"%></td>
-        <td><%= f.number_field :intern_use_2, :style => "width:50px;"%></td>
-        <td><%= f.number_field :verify_digit, :style => "width:50px;"%></td>
-        <td><%= f.text_field :description %></td>
+        <td>
+          <%= f.number_field :elaboration_day, :style => "width:50px;", inline: true,:min=>1,:max=>31, :value => Time.now.day  %>
+        </td>
+        <td>
+          <%= f.number_field :elaboration_month, :style => "width:50px;", inline: true ,:min=>1,:max=>12, :value => Time.now.month %>
+        </td>
+        <td>
+          <%= f.number_field :elaboration_year, :style => "width:75px;", inline: true,:min=>2015,:max=>Time.now.year, :value => Time.now.year  %>
+        </td>
+        <td><%= f.number_field :lifespan, :style => "width:50px;", :min=>1, :max=>99, :value=>6%></td>
+        <td><%= f.collection_select :product_type_id, ProductType.all, :id, :name%>
+        <td><%= f.number_field :daily_batch, :style => "width:25px;",:min=>1,:max=>9, :value => 1%></td>
+        <td><%= f.number_field :intern_use_1, :style => "width:25px;",:min=>0,:max=>99, :value=>0%></td>
+        <td><%= f.number_field :intern_use_2, :style => "width:25px;",:min=>0,:max=>99, :value=>0%></td>
+        <td><%= f.text_field :verifyDigit, :value => '?', :style => "width:25px;", :disabled => true%></td>
   </div>
     </tr>
       </tbody>
     </table>
+
+    <div class="field">
+      <h4>Descripción:</h4>
+      <%= f.text_field :description,:required => true, :placeholder => 'Esto se usa?' %>
+    </div>
 
   <div class="actions">
     <%= f.submit "Crear Lote", class: 'btn'%>

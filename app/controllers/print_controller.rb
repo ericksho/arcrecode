@@ -55,4 +55,29 @@ class PrintController < ApplicationController
 
   end
 
+  def selectBatches
+    @codeCount = 3#12
+
+    batches = Batch.all
+    @autocomplete_codes = Array.new
+    @dataSource = ''
+    batches.each do |batch|
+      c = batch.getStringCode
+      @autocomplete_codes.push c
+      
+    end
+  end
+
+  def selectSamplesBatches
+    @codeCount = 6
+
+    batches = Batch.all
+    @autocomplete_codes = Array.new
+    @dataSource = ''
+    batches.each do |batch|
+      c = batch.getStringCode
+      @autocomplete_codes.push c      
+    end
+  end
+
 end

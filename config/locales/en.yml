@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      batch:
+        elaboration_day:
+          one:   Dia de elaboración,

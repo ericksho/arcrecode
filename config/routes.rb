@@ -17,10 +17,12 @@ Arcrecode::Application.routes.draw do
   get "upload/select"
   get "upload/successful"
   get "print/select", as: 'print_select'
+  get "print/selectBatches", as: 'print_select_batches'
   get "print/sheet", as: 'print_sheet'
   get "index/index"
   post 'print/sheet', as: 'print_sheet_p'
   get "print/selectSamples", as: 'print_select_sample'
+  get "print/selectSamplesBatches", as: 'print_select_sample_batches'
   post 'print/sheetSample', as: 'print_sheet_sample'
   post 'admin/new', as: 'new_user'
   get 'admin/list', as: 'users_list'

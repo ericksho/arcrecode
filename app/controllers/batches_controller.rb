@@ -26,6 +26,8 @@ class BatchesController < ApplicationController
   def create
     @batch = Batch.new(batch_params)
 
+    @batch.send('verify_digit=' ,@batch.getVerifyDigit)
+
     respond_to do |format|
       if @batch.save
         format.html { redirect_to @batch, notice: 'Batch was successfully created.' }
@@ -69,6 +71,6 @@ class BatchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def batch_params
-      params.require(:batch).permit(:elaboration_date, :lifespan, :daily_batch, :intern_use_1, :intern_use_2, :verify_digit, :description)
+      params.require(:batch).permit(:elaboration_day, :elaboration_month, :elaboration_year, :lifespan, :daily_batch, :intern_use_1, :intern_use_2, :verify_digit, :description, :product_type_id)
     end
 end

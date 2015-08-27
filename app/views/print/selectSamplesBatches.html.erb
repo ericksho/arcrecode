@@ -1,10 +1,9 @@
-
-<h1>Selección para imprimir Etiquetas de Productos</h1>
+<h1>Selección para imprimir muestras de Lotes</h1>
 <p>Seleccione los códigos que desea imprimir</p>
-<%= form_tag 'http://arcrecode.comeze.com/sample.html', :method=>'post',:target => "_blank"  do %>
+<%= form_tag print_sheet_sample_path, :method=>'post', :target => "_blank"  do %>
 
-<table border="0" width="1000px">
-<col width="300">
+<table border="0" width="700px">
+<col width="335">
 <tr>
 
 <%= hidden_field_tag 'codeCount', @codeCount %>
@@ -14,7 +13,7 @@
 			<%= select_tag "code_" + i.to_s, options_for_select(@autocomplete_codes), class: 'combobox', :include_blank => 'Escoga un codigo' %>
 		</td>
 
-		<% if i % 3 == 0 %>
+		<% if i % 2 == 0 %>
 			<tr></tr>
 		<% end %>
 
@@ -24,8 +23,8 @@
 
 	</table>
 
-	<%= submit_tag 'Imprimir' %>
-<%end%>
+	<%= submit_tag 'Imprimir Muestras' %>
+<% end %>
 
 
 

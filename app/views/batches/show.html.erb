@@ -1,39 +1,52 @@
+<h1>Detalle Lote</h1>
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Elaboration date:</strong>
-  <%= @batch.elaboration_date %>
+  <strong>Codigo de Barras:</strong>
+  </br>
+  <% img = @batch.getBarcode  %>
+  <%= image_tag "data:image/png;base64," + img %>
 </p>
 
 <p>
-  <strong>Lifespan:</strong>
-  <%= @batch.lifespan %>
+  <strong>Codigo:</strong>
+  <%= @batch.getStringCode%>
 </p>
 
 <p>
-  <strong>Daily batch:</strong>
+  <strong>Fecha de elaboración:</strong>
+  <%= @batch.getElaborationDate.to_formatted_s(:short) %>
+</p>
+
+<p>
+  <strong>Duración:</strong>
+  <%= @batch.lifespan %> (meses)
+</p>
+
+<p>
+  <strong>Lote Diario:</strong>
   <%= @batch.daily_batch %>
 </p>
 
 <p>
-  <strong>Intern use 1:</strong>
+  <strong>Dígito para uso interno 1:</strong>
   <%= @batch.intern_use_1 %>
 </p>
 
 <p>
-  <strong>Intern use 2:</strong>
+  <strong>Dígito para uso interno 2:</strong>
   <%= @batch.intern_use_2 %>
 </p>
 
 <p>
-  <strong>Verify digit:</strong>
+  <strong>Dígito verificador:</strong>
   <%= @batch.verify_digit %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Descripción:</strong>
   <%= @batch.description %>
 </p>
 
-<%= link_to 'Edit', edit_batch_path(@batch) %> |
-<%= link_to 'Back', batches_path %>
+<%= link_to 'Editar', edit_batch_path(@batch) %> |
+<%= link_to 'Volver', batches_path %>

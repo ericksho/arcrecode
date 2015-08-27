@@ -40,4 +40,14 @@ product.product_type_id = 1
 product.packing_type_id = 1
 product.save!
 
-
+batch = Batch.new
+batch.elaboration_day = 26
+batch.elaboration_month = 8
+batch.elaboration_year = 2015
+batch.lifespan = 6
+batch.daily_batch = 1
+batch.intern_use_1 = 0
+batch.intern_use_2 = 0
+batch.verify_digit = 4
+batch.product_type_id = 1
+batch.description = "Lote de prueba"
