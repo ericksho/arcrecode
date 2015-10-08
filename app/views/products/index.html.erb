@@ -39,6 +39,7 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -49,8 +50,9 @@
         <td><%= product.description %></td>
         <td><%= product.getEnterprise %></td>
         <td><%= button_to 'Ver Producto', product, class: 'btn btn-info btn-xs', :method => :get %></td>
-        <td><%= button_to 'Editar Producto', edit_product_path(product), class: 'btn btn-success btn-xs', :method => :get %></td>
-        <td><%= button_to 'Eliminar Producto', product, method: :delete, data: { confirm: 'Con esto eliminara el producto de forma permanente, esta seguro?' }, class: 'btn btn-danger btn-xs'%></td>
+        <td><%= button_to 'Editar', edit_product_path(product), class: 'btn btn-success btn-xs', :method => :get %></td>
+        <td><%= button_to 'Eliminar', product, method: :delete, data: { confirm: 'Con esto eliminara el producto de forma permanente, esta seguro?' }, class: 'btn btn-danger btn-xs'%></td>
+      <td><%= button_to 'Imprimir',{:controller => "print", :action => "selectLarge", :product_code => product.getStringCode}, class: 'btn btn-info btn-xs', :method => :post %></td>
       </tr>
     <% end %>
   </tbody>

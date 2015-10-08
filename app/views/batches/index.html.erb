@@ -24,6 +24,7 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -40,8 +41,9 @@
         <td><%= batch.verify_digit %></td>
         <td><%= batch.description %></td>
         <td><%= button_to 'Ver Lote', batch, class: 'btn btn-info btn-xs', :method => :get %></td>
-        <td><%= button_to 'Editar Lote', edit_batch_path(batch), class: 'btn btn-success btn-xs', :method => :get %></td>
-        <td><%= button_to 'Eliminar Lote', batch, method: :delete, data: { confirm: 'Con esto eliminara el lote de forma permanente, esta seguro?' }, class: 'btn btn-danger btn-xs'%></td>
+        <td><%= button_to 'Editar ', edit_batch_path(batch), class: 'btn btn-success btn-xs', :method => :get %></td>
+        <td><%= button_to 'Eliminar ', batch, method: :delete, data: { confirm: 'Con esto eliminara el lote de forma permanente, esta seguro?' }, class: 'btn btn-danger btn-xs'%></td>
+        <td><%= button_to 'Imprimir',{:controller => "print", :action => "selectLarge", :batch_code => batch.getStringCode}, class: 'btn btn-info btn-xs', :method => :post %></td>
       </tr>
     <% end %>
   </tbody>

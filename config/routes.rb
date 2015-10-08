@@ -17,6 +17,8 @@ Arcrecode::Application.routes.draw do
   get "upload/select"
   get "upload/successful"
   get "print/select", as: 'print_select'
+  get "print/selectLarge", as: 'print_select_large'
+  post "print/selectLarge", as: 'print_select_large_post'
   get "print/selectBatches", as: 'print_select_batches'
   get "print/sheet", as: 'print_sheet'
   get "index/index"
@@ -30,6 +32,8 @@ Arcrecode::Application.routes.draw do
   post 'admin/delete_user', as: 'delete_user'
   post 'products/index', as: 'filterProducts'
   get 'products/index'
+
+  post "print/outPost", as: 'print_out_post'
 
 
   devise_for :users

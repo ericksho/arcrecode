@@ -1,4 +1,5 @@
 class PackingTypesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_packing_type, only: [:show, :edit, :update, :destroy]
 
   # GET /packing_types

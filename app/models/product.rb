@@ -35,6 +35,15 @@ class Product < ActiveRecord::Base
 		img = png.to_yaml.gsub('--- !binary |-','')
 	end
 
+	def self.getProductByCode code
+		country = code[0] + code[1] + code[2]
+		enterprise = code[3] + code[4] + code[5]  + code[6] 
+		product_type =  code[7]  + code[8]  + code[9]  
+		package_type =  code[10]  + code[11]
+		products = Product.where(country: country, enterprise: enterprise, product_type_id: product_type, packing_type_id: package_type)
+		product = products[0]
+	end
+
 	def getStringCode
 		(getArrayCode+[self.getVerifyDigit]).join
 	end
@@ -89,5 +98,4 @@ class Product < ActiveRecord::Base
 	    mod = 10 - sum % 10
 	    mod==10 ? 0 : mod
 	end
-
 end

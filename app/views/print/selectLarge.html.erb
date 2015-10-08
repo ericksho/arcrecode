@@ -1,0 +1,79 @@
+
+<h1>Imprimir Etiqueta</h1>
+<p>Seleccione el producto y lote</p>
+
+<%= form_tag :controller => "print", :action => "selectLarge", :method=>'post',:target => "_blank"  do %>
+<table border="0" width="1000px">
+<col width="300">
+	<tr>	
+		<td>
+			<%= label_tag 'inserte codigo del producto'%>
+			<%= select_tag "product_code" , options_for_select(@autocomplete_codes,@product_code_post), class: 'combobox-product', :include_blank => 'Escoga un codigo',:onchange => "this.form.submit();"%>
+		</td>
+
+		<td>
+			<%= label_tag 'inserte el lote'%>
+			<%= select_tag "batch_code" , options_for_select(@autocomplete_batches, @batch_code_post), class: 'combobox-batch', :include_blank => 'Escoga un codigo',:onchange => "this.form.submit();"%>
+		</td>
+	</tr>
+</table>
+<%end%>
+
+<%= form_tag 'http://www.htmlcodetutorial.com/cgi-bin/mycgi.pl', :method=>'post',:target => "_blank"  do %>
+
+<%= hidden_field_tag(:product_code, @product_code_post) %>
+<%= label_tag "Nombre: " + @product_name%>
+<%= hidden_field_tag(:product_name, @product_name) %>
+<%= label_tag "Descripción: " + @description%>
+<%= hidden_field_tag(:product, @description) %>
+<%= label_tag "Envasado: " + @packaging_type%>
+<%= hidden_field_tag(:packaging_type, @packaging_type) %>
+
+<%= hidden_field_tag(:batch_code, @batch_code_post) %>
+<%= label_tag "Fecha de elaboración: " + @elaboration_date%>
+<%= hidden_field_tag(:elaboration_date, @elaboration_date) %>
+<%= label_tag "Fecha de vencimiento: " + @expiration_date%>
+<%= hidden_field_tag(:expiration_date, @expiration_date) %>
+
+  <% if @ready %>
+    <%if @productMatch%>
+        <%= submit_tag 'Imprimir',class: 'btn'%>
+      <%else%>
+        <%= submit_tag 'Imprimir',class: 'btn', disabled: true%>
+        <mark>Ambos Codigos deben pertenecer al mismo producto</mark> 
+      <%end%>
+  <%else%>
+    <%= submit_tag 'Imprimir',class: 'btn', disabled: true%>
+    <mark>Debe seleccionar ambos codigos para continuar</mark> 
+  <%end%>
+<%end%>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.combobox-product').combobox();
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.combobox-batch').combobox();
+  });
+</script>
+
+<script type="text/javascript">
+function load_product_details() {
+    var value =  $("#product_code").val()
+    var description = <%= raw Product.getProductByCode("7800001001012").description.to_json %>;
+    document.forms[0].elements['product'].value = description
+}
+</script> 
+
+<script type="text/javascript">
+function load_batch_details() {
+    var value =  $("#batch_code").val()
+    var elaboration_date = <%= raw Batch.first.id.to_json %>;
+    document.forms[0].elements['elaboration_date'].value = elaboration_date
+}
+</script> 

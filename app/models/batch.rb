@@ -2,7 +2,6 @@ class Batch < ActiveRecord::Base
 	validates :elaboration_day, uniqueness: { message: "Este lote ya fue creado, el código debe ser único", scope: [:elaboration_month, :elaboration_year, :lifespan, :daily_batch, :intern_use_1, :intern_use_2, :verify_digit] }   
    
 	def getBarcode
-
 		barcode_value = self.getArrayCode.join
 		Batch.getImg barcode_value
 
@@ -36,6 +35,10 @@ class Batch < ActiveRecord::Base
 	def getElaborationDate
 		DateTime.new(self.elaboration_year, self.elaboration_month, self.elaboration_day)
 		## este metodo durara por 28 años
+	end
+
+	def getExpirationDate
+		getElaborationDate + self.lifespan.months
 	end
 
 	def getElaborationDateCode
@@ -82,6 +85,20 @@ class Batch < ActiveRecord::Base
 		end
 
 		digits = self.getElaborationDateCode + lifespan + product_type + daily_batch + intern_use_1 + intern_use_2
+	end
+
+	def self.getBatchByCode code
+		elaborationDate = Batch.getDateFromCode(code[0] + code[1] + code[2] + code[3]) #review this
+		elaboration_day = elaborationDate.day.to_i
+		elaboration_month = elaborationDate.month.to_i
+		elaboration_year = elaborationDate.year.to_i
+		lifespan = (code[4] + code[5]).to_i
+		product_type_id = (code[6] + code[7]  + code[8]).to_i
+		daily_batch = code[9].to_i
+		intern_use_1 = code[10].to_i
+		intern_use_2 = code[11].to_i
+		batch = Batch.where(elaboration_year: elaboration_year, elaboration_month: elaboration_month, elaboration_day: elaboration_day,lifespan: lifespan, product_type_id: product_type_id, daily_batch: daily_batch, intern_use_1: intern_use_1, intern_use_2: intern_use_2)
+		batch = batch[0]
 	end
 	
 	def getVerifyDigit 
