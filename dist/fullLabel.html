@@ -338,7 +338,7 @@
     	qz.append('^FO500,290^FD'+zpl_batch_code+'^FS')
     	qz.append('^FO500,330^FD'+zpl_net_weight+'^FS')
     	qz.append('^FO500,370^FD'+zpl_gross_weight+'^FS')
-    	qz.append('^FO500,410^FD'+zpl_elaboration_date'^FS')
+    	qz.append('^FO500,410^FD'+zpl_elaboration_date+'^FS')
     	qz.append('^FO500,450^FD'+zpl_expiration_date+'^FS')
     	qz.append('^FO500,490^FDCHILE^FS')
     	qz.append('^FO500,530^FDSTORAGE INDICATIONS^FS')
@@ -366,7 +366,8 @@
     	qz.append('^FO100,750^FDJosé Asenjo 7080, La Cisterna, Santiago, Chile - Tel.: +56 2 2880 4582 - email: Info@grainoils.cl - www.grainoils.cl^FS')
 
     	qz.append('^XZ')
-
+    	alert("raw")
+    	qz.printToFile("raw.txt");
     	qz.print();
 
 		// Automatically gets called when "qz.appendImage()" is finished.
@@ -457,7 +458,7 @@
 	</td><td valign="top"><h2>Enviar Impresion</h2>
 
 	<input type="button" onClick="printZPL()" value="Imprimir por ZPL" /><br /><br />
-
+	
     <input type="button" value="Cerrar Dialogo" onClick="self.close()">
 
 	</td></tr></table>
