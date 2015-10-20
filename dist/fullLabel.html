@@ -1,6 +1,6 @@
 <html>
 <!-- License:  LGPL 2.1 or QZ INDUSTRIES SOURCE CODE LICENSE -->
-<head><title>Servicio de Impresion Holding</title>
+<head><title>Servicio de Impresion Grainoils</title>
 <script type="text/javascript" src="js/deployJava.js"></script>
 
 <script type="text/javascript">
@@ -291,83 +291,82 @@
 	*    qz.print();
 	***************************************************************************/     
 	function printZPL() {
-		if (notReady()) { return; }
-		 
+
+		if (notReady()) {
+			alert('nor ready');
+			return; }
+		
 		// Send characters/raw commands to qz using "append"
 		// This example is for ZPL.  Please adapt to your printer language
 		// Hint:  Carriage Return = \r, New Line = \n, Escape Double Quotes= \"
 		var status = 'done';
         var count = 1;
-
-    	var zpl_code = zpl_var[1];
-    	zpl_code = zpl_code.substring(0, zpl_code.length - 1);
-    	var zpl_batch_code = zpl_var[2];
-    	zpl_batch = zpl_batch_code.substring(0, zpl_batch_code.length - 1);
-    	var zpl_product = zpl_var[3];
-    	var zpl_elaboration_date = zpl_var[4];
-    	var zpl_expiration_date = zpl_var[5];
-    	var zpl_batch = zpl_var[6];
-    	var zpl_batch = zpl_var[7];
-
+        //$codeCount = intval(htmlspecialchars($_POST["expiration_date"]));
+        var zpl_product = htmlspecialchars($_POST["product_name"]);
+        var zpl_batch_number = htmlspecialchars($_POST["batch_code"]);
+        var zpl_product_number = htmlspecialchars($_POST["product_code"]);
+        var zpl_elaboration_date = htmlspecialchars($_POST["elaboration_date"]);
+    	var zpl_expiration_date = htmlspecialchars($_POST["expiration_date"]);
 
     	// Other unknown variables
-    	var zpl_net_weight = '10 Kg'
-    	var zpl_gross_weight = '3 Kg'
+    	var zpl_net_weight = intval(htmlspecialchars($_POST["packaging_type"]));
+    	var zpl_gross_weight = intval(htmlspecialchars($_POST["packaging_type"]));
 
     	status = 'undone';
     	var altura = '30';
 
-    	qz.append('^XA')
+qz.append('^XA')
+qz.append('^FX Top section with company logo')
+qz.append('^FO620,500^GFA,3800,3800,19,,00gSFE,01gTF8,03gTFC,0gUFE,0gVF,1gVF83gVF83gVFC7gVFC:::::::::::::7gJFC007NFC7gIFEJ0NFC7gIFK01MFC7gHFCL07LFC7gHFN0LFC7NF800PFEN0LFC7MF8J0OFEN07KFC7LF8L07MF8N03KFC7KFEM03MFO01KFC7KF8N07LFP0KFC7KFO03KFEP07JFC7JFCP0KFCP07JFC7JFCP07JFCP03JFC7JF8P07JFCP03JFC7JFQ03JFC001JFC001JFC7JFQ01JFC007JFE001JFC7IFEQ01JF801LFC01JFC7IFCQ01JF803LFE01JFC7IFCI0KFCI0JF807MF01JFC7IFC007LFC00JF807MF00JFC7IFC01MFE007IF80NF00JFC7IFC07NF807IF80NF80JFC:7IF807NFC07IF80NF80JFC7IF807NFC07IFCJ01JFC0JFC:7IFC07NF807IFCJ01JFC0JFC7IFC07NF807IFCJ01JF81JFC7IFC01MFE007IFCJ01JF81JFC7IFC007LF8007IFCJ01JF81JFC7IFCR0JFCJ01JF81JFC:7IFER0JFEJ01JF81JFC7JFQ01JFEJ01JF01JFC:7JF8P03KFJ01JF03JFC7JFCP07TF0KFC7JFEP0gGFC7KFO01gGFC7KF8N01gGFC7KFEN0gHFC7LF8L03LFCN03LFC7MF8J01MFCN03LFC7NFJ0NFCN03LFC7gFCN03LFC7gFCN01LFC:::7IFCO03F00IFCN01LFC7IFCO03E00IFCO0LFC7IFCO03E007FFCO0LFC7IFCO03C007FFCO0LFC7IFCO03C003OFC0MFC7IFCO01C003OFC03LFC::7IFCO01C003OFC01LFC:7IFCP0E007OFC01LFC7IFCP0E00PF801LFC7IFCP0F00PF001LFC7UFC3PF001LFC7gLFE001LFC7gVFC:7gHF80RFC7gGFE001QFC7IFCS03IFJ07PFC7IFCS03IFJ07FE0MFC7IFCS01FFCJ01FE07LFC7IFCS01FFCJ01FF07LFC:7IFCS01FFCK0FF83LFC7IFCT0FF8K07F83LFC::7IFCT0FF800E003F83LFC7IFCT07FC01F803F81LFC7IFCT07FC03FC03FC1LFC7IFCT07FC07FE03F81LFC7gFC07FF03F81LFC7gFE07FF03F81LFC7gGF07FF03F01LFC7gFCN01LFC::7JF01JF83NFCN01LFC7JF01IFC00NFCN01LFC7JF03IFI01MFCN03LFC7IFE03FFEI01MFCN03LFC7IFE07FFEJ0MFCN03LFC7IFE07FF8J03LFCN07LFC7IFC07FF8J03LFCN0MFC7IFC0IFK03LFCM03MFC7IFC0FFEK03LFCL03NFC7IFC0FFCK01gHFC:7IFC0FF8K01gHFC7IFC0FFJ0F81gHFC7IFC0FFI01F81gHFC7IFC07CI03F81LFCN03E01IFC7IFC078I03F81LFCN03C00IFC7IFCL07F81LFCN03C00IFC7IFCL0FF81LFCN03C00IFC:7IFEK01FF81LFCN01C00IFC7IFEK03FF83LFCN01C00IFC7JFK07FF03LFCN01C00IFC:7JF8J0IF03LFCN01C00IFC7JFCI01FFE03LFCO0C00IFC7KFI07FFE03LFCO0C00IFC7KFE03gIF03IFC7gVFC::::7JF03gPFC7IFC38TFCN03LFC7IFCFCTFCN03LFC7IFCFE7SFCN03LFC7IFCFE7SFCN01LFC7IFCFE7IF3FDMFCN01LFC7IFCFCIFBFE03LFCN01LFC7IFEMF800LFCN01LFC7PFCI03KFCN01LFC7IFC007IFCI01KFCN01LFC7IFC007IF8J0KFCO0LFC7JFCKFK01JFCO0LFC7JFCJFEK01JFCO0LFC7JFCJF8L03PFE07LFC7JFCJF8M0PFE07LFC7IFC007FF8N0OFE03LFC7IFCF8IFO03NFE03LFC7OFO01NFC03LFC7IFC007FEN03OFC01LFC7IFC007FEN0PF001LFC7NFEM03IFCN01LFC7NFEM0JFCN01LFC7IFC007FAL07JFCN01LFC7IFCJFCL07JFCN01LFC7IFCJFEK01KFCN01LFC7IFCJFEK07KFCN03LFC7IFCKFK0LFCN03LFC7OFCI03LFCN03LFC7PF001MFCN07LFC7IFC007SFCM01MFC7IFCC67SFCM03MFC7IFCCE7SFCM0NFC7IFCCE7gOFC7IFCFE7gOFC7gVFC::::::::::::::3gVFC3gVF81gVF8:0gVF,0gUFE,03gTFE,03gTFC,00gTF8,^FS')
 
-    	qz.append('^FX Top section with company logo')
-    	qz.append('^FO500,50^GFA,1449,1449,23,gM0104,gM08008,gX04,gL04Q01,V03FN08M01I01,V07F8Y01,V0FFCS01K01,001FFQ0FFCS01K01,007IF8O0FFCS01K01,01JF8O0FFCL04R01,03JF8O07F8R0108J01,0KF8O01EU03CI01,0FFC018X08R01,1FFJ07E7C03FE01F87F1F8O020400100401,3FEI03FEFE3IF07F8FFBFEN0800400101,3FEI03IFEJF87F8KFI0402008004001,7FCI03IFEJFC7F8KFI0402K04001I01,7FCI03IFEF83FC7F8KF8P04001K08,7FCI03IFEC03FC7F8KF9P040010808,7FCI03FE1E003FE7F8FF0FF9P04001,FFCI03FE06003FE7F8FF07F9P04001,FF8I03FEJ03FE7F8FF07F9P04001I01,FF8I03FEI07FFE7F8FF07F9P0400108,FF807FBFE001IFE7F8FF07F8004J08004001,FF80FFBFE007IFE7F8FF07F800402K0400104,FF80FFBFE00JFE7F8FF07F8J02K04001K04,FFC0FFBFE01FFBFE7F8FF07F8P0400101I02,FFC0FFBFE01FE3FE7F8FF07F8P04001,7FC0FFBFE01FE3FE7F8FF07F8P04001K01,7FC0FFBFE03FE3FE7F8FF07F8P04001,7FE0FFBFE03FC3FE7F8FF07F840204K04001,3FE0FFBFE03FE3FE7F8FF07F8P04001,3FF0FFBFE03FE3FE7F8FF07F8P04001,1FF8FFBFE03JFE7F8FF07F8I06L04001I01,0KFBFE01JFE7F8FF07F8P04001I02,0KFBFE01JFE7F8FF07F8P04001,03JFBFE00JFE7F8FF07F8P04001,01IFE3FE007FBFE7F8FF07F801I08J0400108,003FE01FC001E1FC7F8FF07F800402I07F81FE002,gM0108,gN09,,:::::gO08,,gO04,,gO02,,:gM0801,gM0C,gM04,gM0E,gM0F84,gM03F8,gM04,,gO08,^FS')
+qz.append('^FX Second section with recipient address and permit information.')
+qz.append('^FO200,50^GB1,950,3^FS')
+qz.append('^CFA,30')
+qz.append('^FWr')
+qz.append('^FO540,50^FDPRODUCT^FS')
+qz.append('^FO500,50^FDBATCH NUMBER^FS')
+qz.append('^FO460,50^FDNET WEIGHT^FS')
+qz.append('^FO420,50^FDGROSS WEIGHT^FS')
+qz.append('^FO380,50^FDELABORATION DATE^FS')
+qz.append('^FO340,50^FDEXPIRATION DATE^FS')
+qz.append('^FO290,50^FDCOUNTRY OF ORIGIN^FS')
+qz.append('^FO250,50^FDSTORAGE INDICATIONS^FS')
 
-    	qz.append('^FX Second section with recipient address and permit information.')
-    	qz.append('^FO50,200^GB950,1,3^FS')
-    	qz.append('^CFA,30')
-    	qz.append('^FO50,250^FDPRODUCT^FS')
-    	qz.append('^FO50,290^FDBATCH NUMBER^FS')
-    	qz.append('^FO50,330^FDNET WEIGHT^FS')
-    	qz.append('^FO50,370^FDGROSS WEIGHT^FS')
-    	qz.append('^FO50,410^FDELABORATION DATE^FS')
-    	qz.append('^FO50,450^FDEXPIRATION DATE^FS')
-    	qz.append('^FO50,490^FDCOUNTRY OF ORIGIN^FS')
-    	qz.append('^FO50,530^FDSTORAGE INDICATIONS^FS')
+qz.append('^FO540,450^FD'+zpl_product+'^FS')
+qz.append('^FO500,450^FD'+zpl_batch_number+'^FS')
+qz.append('^FO460,450^FD'+zpl_net_weight+'^FS')
+qz.append('^FO420,450^FD'+zpl_gross_weight+'^FS')
+qz.append('^FO380,450^FD'+zpl_elaboration_date+'^FS')
+qz.append('^FO340,450^FD'+zpl_expiration_date+'^FS')
+qz.append('^FO290,450^FDCHILE^FS')
+qz.append('^FO250,450^FDSTORAGE INDICATIONS^FS')
 
-    	qz.append('^FO500,250^FD'+zpl_product+'^FS')
-    	qz.append('^FO500,290^FD'+zpl_batch_code+'^FS')
-    	qz.append('^FO500,330^FD'+zpl_net_weight+'^FS')
-    	qz.append('^FO500,370^FD'+zpl_gross_weight+'^FS')
-    	qz.append('^FO500,410^FD'+zpl_elaboration_date+'^FS')
-    	qz.append('^FO500,450^FD'+zpl_expiration_date+'^FS')
-    	qz.append('^FO500,490^FDCHILE^FS')
-    	qz.append('^FO500,530^FDSTORAGE INDICATIONS^FS')
-    	qz.append('^FO50,600^GB950,1,3^FS')
+qz.append('^FO600,50^GB1,950,3^FS')
 
-    	qz.append('^FX Third section with barcodes')
-    	qz.append('^CF0,40')
-    	qz.append('^FWB')
-    	qz.append('^FO1020,490^FDBatch Number^FS')
-    	qz.append('^FX Batch barcode')
-    	qz.append('^FO1050,425^BY3')
-    	qz.append('^BEB,100,Y,N')
-    	qz.append('^FD'+zpl_batch+'^FS')
+qz.append('^FX Third section with barcodes')
+qz.append('^CF0,40')
+qz.append('^FWN')
+qz.append('^FO150,1010^FDBatch Number^FS')
+qz.append('^FX Batch barcode')
+qz.append('^FO100,1050^BY3')
+qz.append('^BEN,100,Y,N')
+qz.append('^FD'+zpl_batch_number+'^FS')
 
-    	qz.append('^FX Product barcode')
-    	qz.append('^FWB')
-    	qz.append('^FO1020,150^FDProduct Code^FS')
-    	qz.append('^FO1050,75^BY3')
-    	qz.append('^BEB,100,Y,N')
-    	qz.append('^FD'+zpl_code+'^FS')
+qz.append('^FX Product barcode')
+qz.append('^FWN')
+qz.append('^FO500,1010^FDProduct Code^FS')
+qz.append('^FO450,1050^BY3')
+qz.append('^BEN,100,Y,N')
+qz.append('^FD'+zpl_product_number+'^FS')
 
+qz.append('^FX Forth section with address and contact information.')
+qz.append('^CF0,30')
+qz.append('^FWr')
+qz.append('^FO50,100^FDJosé Asenjo 7080, La Cisterna, Santiago, Chile - Tel.: +56 2 2880 4582 - email: Info@grainoils.cl - www.grainoils.cl^FS')
 
-    	qz.append('^FX Forth section with address and contact information.')
-    	qz.append('^CF0,30')
-    	qz.append('^FO100,750^FDJosé Asenjo 7080, La Cisterna, Santiago, Chile - Tel.: +56 2 2880 4582 - email: Info@grainoils.cl - www.grainoils.cl^FS')
+qz.append('^XZ')
 
-    	qz.append('^XZ')
-    	alert("raw")
-    	qz.printToFile("raw.txt");
+    	
     	qz.print();
 
 		// Automatically gets called when "qz.appendImage()" is finished.
