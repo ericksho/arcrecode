@@ -302,15 +302,6 @@
 		var status = 'done';
         var count = 1;
         //$codeCount = intval(htmlspecialchars($_POST["expiration_date"]));
-        var zpl_product = htmlspecialchars($_POST["product_name"]);
-        var zpl_batch_number = htmlspecialchars($_POST["batch_code"]);
-        var zpl_product_number = htmlspecialchars($_POST["product_code"]);
-        var zpl_elaboration_date = htmlspecialchars($_POST["elaboration_date"]);
-    	var zpl_expiration_date = htmlspecialchars($_POST["expiration_date"]);
-
-    	// Other unknown variables
-    	var zpl_net_weight = intval(htmlspecialchars($_POST["packaging_type"]));
-    	var zpl_gross_weight = intval(htmlspecialchars($_POST["packaging_type"]));
 
     	status = 'undone';
     	var altura = '30';
@@ -331,7 +322,6 @@ qz.append('^FO380,50^FDELABORATION DATE^FS')
 qz.append('^FO340,50^FDEXPIRATION DATE^FS')
 qz.append('^FO290,50^FDCOUNTRY OF ORIGIN^FS')
 qz.append('^FO250,50^FDSTORAGE INDICATIONS^FS')
-
 qz.append('^FO540,450^FD'+zpl_product+'^FS')
 qz.append('^FO500,450^FD'+zpl_batch_number+'^FS')
 qz.append('^FO460,450^FD'+zpl_net_weight+'^FS')
@@ -360,9 +350,9 @@ qz.append('^BEN,100,Y,N')
 qz.append('^FD'+zpl_product_number+'^FS')
 
 qz.append('^FX Forth section with address and contact information.')
-qz.append('^CF0,30')
+qz.append('^CF0,25,20')
 qz.append('^FWr')
-qz.append('^FO50,100^FDJosé Asenjo 7080, La Cisterna, Santiago, Chile - Tel.: +56 2 2880 4582 - email: Info@grainoils.cl - www.grainoils.cl^FS')
+qz.append('^FO50,100^FDJose Asenjo 7080, La Cisterna, Santiago, Chile - Tel.: +56-2-2880-4582 - email: Info@grainoils.cl - www.grainoils.cl^FS')
 
 qz.append('^XZ')
 
@@ -433,6 +423,18 @@ qz.append('^XZ')
 
 	<script type='text/javascript'>
 		<?php
+
+        $zpl_product = htmlspecialchars($_POST["product_name"]);
+        $zpl_batch_number = htmlspecialchars($_POST["batch_code"]);
+        $zpl_product_number = htmlspecialchars($_POST["product_code"]);
+        $zpl_elaboration_date = htmlspecialchars($_POST["elaboration_date"]);
+    	$zpl_expiration_date = htmlspecialchars($_POST["expiration_date"]);
+
+    	// Other unknown variables
+    	$zpl_net_weight = intval(htmlspecialchars($_POST["packaging_type"]));
+    	$zpl_gross_weight = intval(htmlspecialchars($_POST["packaging_type"]));
+
+
 			$zpl_var[] = array();
 		  	$codeCount = intval(htmlspecialchars($_POST["codeCount"]));
 		  	for ($i = 1; $i <= $codeCount; $i++)
@@ -446,6 +448,13 @@ qz.append('^XZ')
 		  	}
 		  	$zpl_java = json_encode($zpl_var);
 			echo "var zpl_var = ". $zpl_java . ";\n";
+			echo "var zpl_product = '". $zpl_product . "';\n";
+			echo "var zpl_batch_number = ". $zpl_batch_number . ";\n";
+			echo "var zpl_product_number = ". $zpl_product_number . ";\n";
+			echo "var zpl_elaboration_date = '". $zpl_elaboration_date . "';\n";
+			echo "var zpl_expiration_date = '". $zpl_expiration_date . "';\n";
+			echo "var zpl_net_weight = ". $zpl_net_weight . ";\n";
+			echo "var zpl_gross_weight = ". $zpl_gross_weight . ";\n";
 			echo "var code_count = ". $codeCount;
 		?>
 	</script>
