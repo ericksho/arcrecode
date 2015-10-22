@@ -13,21 +13,6 @@ class ProductsController < ApplicationController
       @products.delete_if {|prod| !prod.getStringCode.include? @code.to_s}
     end  
 
-    if params.has_key?(:desc)
-      @desc = params[:desc]
-      @products.delete_if {|prod| !prod.description.include? @desc}
-    end
-
-    if params.has_key?(:filter)
-      @organic = true;
-      ## filtramos las empresas
-      if !params.has_key?(:organic)
-        @products.delete_if {|prod| prod.enterprise == 1}
-        @organic = false;
-      end  
-    else
-      @organic = true;
-    end
   end
 
   # GET /products/1
