@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Cantidad</th>
+      <th>Cantidad Neta</th>
       <th>Medida</th>
       <th>Código</th>
       <th></th>
@@ -16,6 +17,7 @@
     <% @packing_types.each do |packing_type| %>
       <tr>
         <td><%= packing_type.amount %></td>
+        <td><%= packing_type.gross_weight %></td>
         <td><%= packing_type.measure %></td>
         <td><%= packing_type.code %></td>
         <td><%= link_to 'Mostrar', packing_type, class: 'btn btn-info btn-xs', :method => :get %></td>

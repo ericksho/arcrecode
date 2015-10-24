@@ -70,6 +70,6 @@ class PackingTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def packing_type_params
-      params.require(:packing_type).permit(:amount, :measure, :code)
+      params.require(:packing_type).permit(:amount, :measure, :code, :gross_weight)
     end
 end

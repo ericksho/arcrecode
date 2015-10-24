@@ -24,10 +24,10 @@
 <%= hidden_field_tag(:product_code, @product_code_post) %>
 <%= label_tag "Nombre: " + @product_name%>
 <%= hidden_field_tag(:product_name, @product_name) %>
-<%= label_tag "Descripción: " + @description%>
-<%= hidden_field_tag(:product, @description) %>
 <%= label_tag "Envasado: " + @packaging_type%>
 <%= hidden_field_tag(:packaging_type, @packaging_type) %>
+<%= label_tag "Envasado neto: " + @packaging_net_type%>
+<%= hidden_field_tag(:packaging_net_type, @packaging_net_type) %>
 
 <%= hidden_field_tag(:batch_code, @batch_code_post) %>
 <%= label_tag "Fecha de elaboración: " + @elaboration_date%>
