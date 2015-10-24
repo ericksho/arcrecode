@@ -12,16 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label "Es orgánico" %><br>
-    <%= f.check_box :organic %>
-  </div>
-  <div class="field">
     <%= f.label :Código %><br>
     <%= f.number_field :code,:required => true, :min => 0, :max => 999 %>
   </div>
   <div class="field">
     <%= f.label :Nombre %><br>
     <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label "Nombre en ingles" %><br>
+    <%= f.text_field :englishName %>
   </div>
   <div class="actions">
     <%= f.submit "Crear Tipo Producto", class: 'btn'%>
