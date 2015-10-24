@@ -329,7 +329,7 @@ qz.append('^FO420,450^FD'+zpl_gross_weight+'^FS')
 qz.append('^FO380,450^FD'+zpl_elaboration_date+'^FS')
 qz.append('^FO340,450^FD'+zpl_expiration_date+'^FS')
 qz.append('^FO290,450^FDCHILE^FS')
-qz.append('^FO250,450^FDSTORAGE INDICATIONS^FS')
+qz.append('^FO250,450^FDKeep in a cool and dry place^FS')
 
 qz.append('^FO600,50^GB1,950,3^FS')
 
@@ -350,7 +350,96 @@ qz.append('^BEN,100,Y,N')
 qz.append('^FD'+zpl_product_number+'^FS')
 
 qz.append('^FX Forth section with address and contact information.')
-qz.append('^CF0,25,20')
+qz.append('^CF0,25,qz')
+qz.append('^FWr')
+qz.append('^FO50,100^FDJose Asenjo 7080, La Cisterna, Santiago, Chile - Tel.: +56-2-2880-4582 - email: Info@grainoils.cl - www.grainoils.cl^FS')
+
+qz.append('^XZ')
+
+    	
+    	qz.print();
+
+		// Automatically gets called when "qz.appendImage()" is finished.
+		window['qzDoneAppending'] = function() {
+			// Append the rest of our commands
+			qz.append('^FS\n');
+			qz.append('^XZ\n');  
+			
+			// Tell the apple to print.
+			qz.print();
+			
+			// Remove any reference to this function
+			window['qzDoneAppending'] = null;
+		};
+	}
+
+	/***************************************************************************
+	* Prototype function for printing raw ZPL commands
+	* Usage:
+	*    qz.append('^XA\n^FO50,50^ADN,36,20^FDHello World!\n^FS\n^XZ\n');
+	*    qz.print();
+	***************************************************************************/     
+	function printZPLSpanish() {
+
+		if (notReady()) {
+			alert('nor ready');
+			return; }
+		
+		// Send characters/raw commands to qz using "append"
+		// This example is for ZPL.  Please adapt to your printer language
+		// Hint:  Carriage Return = \r, New Line = \n, Escape Double Quotes= \"
+		var status = 'done';
+        var count = 1;
+        //$codeCount = intval(htmlspecialchars($_POST["expiration_date"]));
+
+    	status = 'undone';
+    	var altura = '30';
+
+qz.append('^XA')
+qz.append('^FX Top section with company logo')
+qz.append('^FO620,500^GFA,3800,3800,19,,00gSFE,01gTF8,03gTFC,0gUFE,0gVF,1gVF83gVF83gVFC7gVFC:::::::::::::7gJFC007NFC7gIFEJ0NFC7gIFK01MFC7gHFCL07LFC7gHFN0LFC7NF800PFEN0LFC7MF8J0OFEN07KFC7LF8L07MF8N03KFC7KFEM03MFO01KFC7KF8N07LFP0KFC7KFO03KFEP07JFC7JFCP0KFCP07JFC7JFCP07JFCP03JFC7JF8P07JFCP03JFC7JFQ03JFC001JFC001JFC7JFQ01JFC007JFE001JFC7IFEQ01JF801LFC01JFC7IFCQ01JF803LFE01JFC7IFCI0KFCI0JF807MF01JFC7IFC007LFC00JF807MF00JFC7IFC01MFE007IF80NF00JFC7IFC07NF807IF80NF80JFC:7IF807NFC07IF80NF80JFC7IF807NFC07IFCJ01JFC0JFC:7IFC07NF807IFCJ01JFC0JFC7IFC07NF807IFCJ01JF81JFC7IFC01MFE007IFCJ01JF81JFC7IFC007LF8007IFCJ01JF81JFC7IFCR0JFCJ01JF81JFC:7IFER0JFEJ01JF81JFC7JFQ01JFEJ01JF01JFC:7JF8P03KFJ01JF03JFC7JFCP07TF0KFC7JFEP0gGFC7KFO01gGFC7KF8N01gGFC7KFEN0gHFC7LF8L03LFCN03LFC7MF8J01MFCN03LFC7NFJ0NFCN03LFC7gFCN03LFC7gFCN01LFC:::7IFCO03F00IFCN01LFC7IFCO03E00IFCO0LFC7IFCO03E007FFCO0LFC7IFCO03C007FFCO0LFC7IFCO03C003OFC0MFC7IFCO01C003OFC03LFC::7IFCO01C003OFC01LFC:7IFCP0E007OFC01LFC7IFCP0E00PF801LFC7IFCP0F00PF001LFC7UFC3PF001LFC7gLFE001LFC7gVFC:7gHF80RFC7gGFE001QFC7IFCS03IFJ07PFC7IFCS03IFJ07FE0MFC7IFCS01FFCJ01FE07LFC7IFCS01FFCJ01FF07LFC:7IFCS01FFCK0FF83LFC7IFCT0FF8K07F83LFC::7IFCT0FF800E003F83LFC7IFCT07FC01F803F81LFC7IFCT07FC03FC03FC1LFC7IFCT07FC07FE03F81LFC7gFC07FF03F81LFC7gFE07FF03F81LFC7gGF07FF03F01LFC7gFCN01LFC::7JF01JF83NFCN01LFC7JF01IFC00NFCN01LFC7JF03IFI01MFCN03LFC7IFE03FFEI01MFCN03LFC7IFE07FFEJ0MFCN03LFC7IFE07FF8J03LFCN07LFC7IFC07FF8J03LFCN0MFC7IFC0IFK03LFCM03MFC7IFC0FFEK03LFCL03NFC7IFC0FFCK01gHFC:7IFC0FF8K01gHFC7IFC0FFJ0F81gHFC7IFC0FFI01F81gHFC7IFC07CI03F81LFCN03E01IFC7IFC078I03F81LFCN03C00IFC7IFCL07F81LFCN03C00IFC7IFCL0FF81LFCN03C00IFC:7IFEK01FF81LFCN01C00IFC7IFEK03FF83LFCN01C00IFC7JFK07FF03LFCN01C00IFC:7JF8J0IF03LFCN01C00IFC7JFCI01FFE03LFCO0C00IFC7KFI07FFE03LFCO0C00IFC7KFE03gIF03IFC7gVFC::::7JF03gPFC7IFC38TFCN03LFC7IFCFCTFCN03LFC7IFCFE7SFCN03LFC7IFCFE7SFCN01LFC7IFCFE7IF3FDMFCN01LFC7IFCFCIFBFE03LFCN01LFC7IFEMF800LFCN01LFC7PFCI03KFCN01LFC7IFC007IFCI01KFCN01LFC7IFC007IF8J0KFCO0LFC7JFCKFK01JFCO0LFC7JFCJFEK01JFCO0LFC7JFCJF8L03PFE07LFC7JFCJF8M0PFE07LFC7IFC007FF8N0OFE03LFC7IFCF8IFO03NFE03LFC7OFO01NFC03LFC7IFC007FEN03OFC01LFC7IFC007FEN0PF001LFC7NFEM03IFCN01LFC7NFEM0JFCN01LFC7IFC007FAL07JFCN01LFC7IFCJFCL07JFCN01LFC7IFCJFEK01KFCN01LFC7IFCJFEK07KFCN03LFC7IFCKFK0LFCN03LFC7OFCI03LFCN03LFC7PF001MFCN07LFC7IFC007SFCM01MFC7IFCC67SFCM03MFC7IFCCE7SFCM0NFC7IFCCE7gOFC7IFCFE7gOFC7gVFC::::::::::::::3gVFC3gVF81gVF8:0gVF,0gUFE,03gTFE,03gTFC,00gTF8,^FS')
+
+qz.append('^FX Second section with recipient address and permit information.')
+qz.append('^FO200,50^GB1,950,3^FS')
+qz.append('^CFA,30')
+qz.append('^FWr')
+qz.append('^FO540,50^FDPRODUCTO^FS')
+qz.append('^FO500,50^FDLOTE^FS')
+qz.append('^FO460,50^FDPESO NETO^FS')
+qz.append('^FO420,50^FDPESO BRUTO^FS')
+qz.append('^FO380,50^FDFECHA DE ELABORACION^FS')
+qz.append('^FO340,50^FDFECHA DE VENCIMIENTO^FS')
+qz.append('^FO290,50^FDPAIS DE ORIGEN^FS')
+qz.append('^FO250,50^FDALMACENAMIENTO^FS')
+qz.append('^FO540,450^FD'+zpl_product+'^FS')
+qz.append('^FO500,450^FD'+zpl_batch_number+'^FS')
+qz.append('^FO460,450^FD'+zpl_net_weight+'^FS')
+qz.append('^FO420,450^FD'+zpl_gross_weight+'^FS')
+qz.append('^FO380,450^FD'+zpl_elaboration_date+'^FS')
+qz.append('^FO340,450^FD'+zpl_expiration_date+'^FS')
+qz.append('^FO290,450^FDCHILE^FS')
+qz.append('^FO250,450^FDMantener en un lugar seco^FS')
+
+qz.append('^FO600,50^GB1,950,3^FS')
+
+qz.append('^FX Third section with barcodes')
+qz.append('^CF0,40')
+qz.append('^FWN')
+qz.append('^FO150,1010^FCODIGO LOTE^FS')
+qz.append('^FX Batch barcode')
+qz.append('^FO100,1050^BY3')
+qz.append('^BEN,100,Y,N')
+qz.append('^FD'+zpl_batch_number+'^FS')
+
+qz.append('^FX Product barcode')
+qz.append('^FWN')
+qz.append('^FO500,1010^FDPCODIGO PRODUCTO^FS')
+qz.append('^FO450,1050^BY3')
+qz.append('^BEN,100,Y,N')
+qz.append('^FD'+zpl_product_number+'^FS')
+
+qz.append('^FX Forth section with address and contact information.')
+qz.append('^CF0,25,qz')
 qz.append('^FWr')
 qz.append('^FO50,100^FDJose Asenjo 7080, La Cisterna, Santiago, Chile - Tel.: +56-2-2880-4582 - email: Info@grainoils.cl - www.grainoils.cl^FS')
 
@@ -373,6 +462,24 @@ qz.append('^XZ')
 		};
 	}
 	
+	/***************************************************************************
+	* selector de impresiones
+	***************************************************************************/
+	function printHub() {
+		if (document.getElementById('lenguaje').checked)
+		{
+			for (i = 0; i < parseInt(document.getElementById('quantity').value); i++) { 
+				printZPL();
+			}
+		} else	{
+			for (i = 0; i < parseInt(document.getElementById('quantity').value); i++) { 
+				printZPLSpanish();
+			}
+		}
+
+		
+	}
+
 	/***************************************************************************
 	* Gets the current url's path, such as http://site.com/example/dist/
 	***************************************************************************/
@@ -465,7 +572,15 @@ qz.append('^XZ')
 
 	</td><td valign="top"><h2>Enviar Impresion</h2>
 
-	<input type="button" onClick="printZPL()" value="Imprimir por ZPL" /><br /><br />
+	<input type="button" onClick="printHub()" value="Imprimir" /><br /><br />
+
+	<input type="checkbox" name="lenguaje" id="lenguaje" value="english"> Imprimir en Ingles<br />
+
+	<input type="number" name="quantity" id="quantity" min="1" max="10"> Copias <br />
+
+	<input type="button" onClick="printZPL()" value="Imprimir en ingles" /><br /><br />
+	
+	<input type="button" onClick="printZPLSpanish()" value="Imprimir en español" /><br /><br />
 	
     <input type="button" value="Cerrar Dialogo" onClick="self.close()">
 

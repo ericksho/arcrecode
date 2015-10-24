@@ -1,30 +1,16 @@
-dos etiquetas, 
-codigo producto
-3 digitos para producto
-2 digitos para envasado
+Mantener en un lugar seco y libre de humedad
+etiqueta en español e ingles
 
-codigo lote
-fecha de elaboración {4}
-fecha de vencimiento (Meses duración) [12, 18 y 24] {2}
-producto [desplegable fijo] {3}
-lote correlativo del día [1-3] {1}
-uso interno {2}
+eliminar campo organico
+quitar descripcion
+editar producto
 
-arcre221
+agregar campo nombre en ingles al tipo de producto
+cambiar ml por cc
 
-Etiqueta código (pequeñas) 3.3 x 2.2
+agregar campo para imprimir n etiquetas iguales
 
-granasur.cl
-naturaloils.cl
+viernes 30 con leo, toda la mañana
+lunes 2 subir web a la web
 
-%%%%%%%% TO DO %%%%%%%%%%
-
-Producto
-	Imprimir Codigos
-	Imprimir Muestras
-	
-Lote
-	Crear lote
-	mostrar lotes
-	imprimir lotes
-	imprimir muestras
+viernes
