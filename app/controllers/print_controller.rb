@@ -27,6 +27,7 @@ class PrintController < ApplicationController
       @description = prod.description
       @product_name = ProductType.find_by_id(prod.product_type_id).name
       @packaging_type = PackingType.find_by_id(prod.packing_type_id).description
+      @packaging_net_type = PackingType.find_by_id(prod.packing_type_id).netDescription
       product_ok = true
       productTypeP = prod.product_type_id
     end
@@ -38,8 +39,8 @@ class PrintController < ApplicationController
       batch_ok = false
     else
       bat = Batch.getBatchByCode(@batch_code_post)
-      @elaboration_date = bat.getElaborationDate().strftime("%m-%d-%Y")
-      @expiration_date = bat.getExpirationDate().strftime("%m-%d-%Y")
+      @elaboration_date = bat.getElaborationDate().strftime("%m-%Y")
+      @expiration_date = bat.getExpirationDate().strftime("%m-%Y")
       batch_ok = true
       productTypeB = bat.product_type_id
     end

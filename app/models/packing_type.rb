@@ -3,4 +3,7 @@ class PackingType < ActiveRecord::Base
 	def description
     	"#{amount} #{measure}"
   	end
+  	def netDescription
+    	"#{gross_weight} #{measure}"
+  	end
 end

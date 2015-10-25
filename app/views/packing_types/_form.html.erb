@@ -20,6 +20,10 @@
     <%= f.number_field :amount %>
   </div>
   <div class="field">
+    <%= f.label :"Cantidad neta" %><br>
+    <%= f.number_field :gross_weight %>
+  </div>
+  <div class="field">
     <%= f.label :Código %><br>
     <%= f.number_field :code, :required => true, :min => 0, :max => 99 %>
   </div>
