@@ -424,7 +424,7 @@ qz.append('^FO600,50^GB1,950,3^FS')
 qz.append('^FX Third section with barcodes')
 qz.append('^CF0,40')
 qz.append('^FWN')
-qz.append('^FO150,1010^FCODIGO LOTE^FS')
+qz.append('^FO150,1010^FDCODIGO LOTE^FS')
 qz.append('^FX Batch barcode')
 qz.append('^FO100,1050^BY3')
 qz.append('^BEN,100,Y,N')
@@ -432,7 +432,7 @@ qz.append('^FD'+zpl_batch_number+'^FS')
 
 qz.append('^FX Product barcode')
 qz.append('^FWN')
-qz.append('^FO500,1010^FDPCODIGO PRODUCTO^FS')
+qz.append('^FO500,1010^FDCodigo Producto^FS')
 qz.append('^FO450,1050^BY3')
 qz.append('^BEN,100,Y,N')
 qz.append('^FD'+zpl_product_number+'^FS')
@@ -537,8 +537,8 @@ qz.append('^XZ')
     	$zpl_expiration_date = htmlspecialchars($_POST["expiration_date"]);
 
     	// Other unknown variables
-    	$zpl_net_weight = intval(htmlspecialchars($_POST["packaging_type"]));
-    	$zpl_gross_weight = intval(htmlspecialchars($_POST["packaging_type"]));
+    	$zpl_net_weight = htmlspecialchars($_POST["packaging_type"]);
+    	$zpl_gross_weight = htmlspecialchars($_POST["packaging_net_type"]);
 
 
 			$zpl_var[] = array();
@@ -559,8 +559,8 @@ qz.append('^XZ')
 			echo "var zpl_product_number = ". $zpl_product_number . ";\n";
 			echo "var zpl_elaboration_date = '". $zpl_elaboration_date . "';\n";
 			echo "var zpl_expiration_date = '". $zpl_expiration_date . "';\n";
-			echo "var zpl_net_weight = ". $zpl_net_weight . ";\n";
-			echo "var zpl_gross_weight = ". $zpl_gross_weight . ";\n";
+			echo "var zpl_net_weight = '". $zpl_net_weight . "';\n";
+			echo "var zpl_gross_weight = '". $zpl_gross_weight . "';\n";
 			echo "var code_count = ". $codeCount;
 		?>
 	</script>
