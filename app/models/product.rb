@@ -7,8 +7,14 @@ class Product < ActiveRecord::Base
 			ent = 'GrainOils'
 		end
 		ent
-				
-				
+	end
+
+	def getProductName
+		ProductType.find_by_id(self.product_type_id).name
+	end
+
+	def getProductEnglishName
+		ProductType.find_by_id(self.product_type_id).englishName
 	end
 
 	def getBarcode
@@ -16,6 +22,14 @@ class Product < ActiveRecord::Base
 		barcode_value = self.getArrayCode.join
 		Product.getImg barcode_value
 
+	end
+
+	def getPackage
+		PackingType.find_by_id(self.packing_type_id).description
+	end
+
+	def getPackageNet
+		PackingType.find_by_id(self.packing_type_id).netDescription
 	end
 
 	def self.getImg barcode_value

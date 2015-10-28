@@ -1,19 +1,44 @@
 <h1>Detalle Producto</h1>
 <p id="notice"><%= notice %></p>
 
+<h4>Detalle:</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Codigo País</th>
+        <th>Empresa</th>
+        <th>Nombre Producto</th>
+        <th>Nombre Ingles</th>
+        <th>Envasado</th>
+        <th>Envasado Neto</th>
+        <th>Digito Verificador</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= @product.country %></td>
+        <td><%= @product.getEnterprise%></td>
+        <td><%= @product.getProductName%></td>
+        <td><%= @product.getProductEnglishName%></td>
+        <td><%= @product.getPackage%></td>
+        <td><%= @product.getPackageNet%></td>
+        <td><%= @product.getVerifyDigit%></td>
+      </tr>
+    </tbody>
+  </table>
+  </br>
 <p>
   <strong>Codigo de Barras:</strong>
   </br>
   <% img = @product.getBarcode  %>
   <%= image_tag "data:image/png;base64," + img %>
 </p>
-
+</br>
 <p>
   <strong>Codigo:</strong>
   <%= @product.getStringCode%>
 </p>
-
-
 
 <%= link_to 'Editar Producto', edit_product_path(@product) %> |
 <%= link_to 'Volver', products_path %>
