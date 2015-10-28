@@ -24,7 +24,6 @@ class PrintController < ApplicationController
       product_ok = false
     else
       prod = Product.getProductByCode(@product_code_post)
-      @description = prod.description
       @product_name = ProductType.find_by_id(prod.product_type_id).name
       @packaging_type = PackingType.find_by_id(prod.packing_type_id).description
       @packaging_net_type = PackingType.find_by_id(prod.packing_type_id).netDescription

@@ -40,7 +40,9 @@ class Product < ActiveRecord::Base
 		enterprise = code[3] + code[4] + code[5]  + code[6] 
 		product_type =  code[7]  + code[8]  + code[9]  
 		package_type =  code[10]  + code[11]
-		products = Product.where(country: country, enterprise: enterprise, product_type_id: product_type, packing_type_id: package_type)
+		product_type_id = ProductType.find_by_code(product_type).id
+		packing_type_id = PackingType.find_by_code(package_type).id
+		products = Product.where(country: country, enterprise: enterprise, product_type_id: product_type_id, packing_type_id: packing_type_id)
 		product = products[0]
 	end
 
@@ -51,8 +53,8 @@ class Product < ActiveRecord::Base
 	def getArrayCode
 		country = self.country.to_s.scan(/\d/).map { |x| x.to_i }
 		enterprise = self.enterprise.to_s.scan(/\d/).map { |x| x.to_i }
-		product_type = self.product_type_id.to_s.scan(/\d/).map { |x| x.to_i }
-		package_type = self.packing_type_id.to_s.scan(/\d/).map { |x| x.to_i }
+		product_type = ProductType.find_by_id(self.product_type_id).code.to_s.scan(/\d/).map { |x| x.to_i }
+		package_type = PackingType.find_by_id(self.packing_type_id).code.to_s.scan(/\d/).map { |x| x.to_i }
 
 		case country.count
 		when 2

@@ -62,18 +62,3 @@
   });
 </script>
 
-<script type="text/javascript">
-function load_product_details() {
-    var value =  $("#product_code").val()
-    var description = <%= raw Product.getProductByCode("7800001001012").description.to_json %>;
-    document.forms[0].elements['product'].value = description
-}
-</script> 
-
-<script type="text/javascript">
-function load_batch_details() {
-    var value =  $("#batch_code").val()
-    var elaboration_date = <%= raw Batch.first.id.to_json %>;
-    document.forms[0].elements['elaboration_date'].value = elaboration_date
-}
-</script> 
