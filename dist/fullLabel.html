@@ -100,7 +100,7 @@
 		}
 		// If a printer hasn't been selected, display a message.
 		else if (!qz.getPrinter()) {
-			alert('Please select a printer first by using the "Detect Printer" button.');
+			alert('Seleccione una impresora antes de seguir');
 			return true;
 		}
 		return false;
@@ -293,7 +293,6 @@
 	function printZPL() {
 
 		if (notReady()) {
-			alert('nor ready');
 			return; }
 		
 		// Send characters/raw commands to qz using "append"
@@ -350,7 +349,7 @@ qz.append('^BEN,100,Y,N')
 qz.append('^FD'+zpl_product_number+'^FS')
 
 qz.append('^FX Forth section with address and contact information.')
-qz.append('^CF0,25,qz')
+qz.append('^CF0,35,20,qz')
 qz.append('^FWr')
 qz.append('^FO50,100^FDJose Asenjo 7080, La Cisterna, Santiago, Chile - Tel.: +56-2-2880-4582 - email: Info@grainoils.cl - www.grainoils.cl^FS')
 
@@ -425,7 +424,7 @@ qz.append('^FO600,50^GB1,950,3^FS')
 qz.append('^FX Third section with barcodes')
 qz.append('^CF0,40')
 qz.append('^FWN')
-qz.append('^FO150,1010^FCODIGO LOTE^FS')
+qz.append('^FO150,1010^FDCODIGO LOTE^FS')
 qz.append('^FX Batch barcode')
 qz.append('^FO100,1050^BY3')
 qz.append('^BEN,100,Y,N')
@@ -433,13 +432,13 @@ qz.append('^FD'+zpl_batch_number+'^FS')
 
 qz.append('^FX Product barcode')
 qz.append('^FWN')
-qz.append('^FO500,1010^FDPCODIGO PRODUCTO^FS')
+qz.append('^FO500,1010^FDCodigo Producto^FS')
 qz.append('^FO450,1050^BY3')
 qz.append('^BEN,100,Y,N')
 qz.append('^FD'+zpl_product_number+'^FS')
 
 qz.append('^FX Forth section with address and contact information.')
-qz.append('^CF0,25,qz')
+qz.append('^CF0,35,20,qz')
 qz.append('^FWr')
 qz.append('^FO50,100^FDJose Asenjo 7080, La Cisterna, Santiago, Chile - Tel.: +56-2-2880-4582 - email: Info@grainoils.cl - www.grainoils.cl^FS')
 
@@ -526,7 +525,7 @@ qz.append('^XZ')
 	<script type="text/javascript" src="js/jquery.plugin.html2canvas.js"></script>
 	</head>
 	<body id="content" bgcolor="#FFF380">
-	<div style="position:absolute;top:0;left:5;"><h1 id="title">Servicio de Impresion Holding usando la version </h1></div><br /><br /><br />
+	<div style="position:absolute;top:0;left:5;"><h1 id="title">Servicio de Impresion GrainOils usando la version </h1></div><br /><br /><br />
 
 	<script type='text/javascript'>
 		<?php
@@ -538,8 +537,8 @@ qz.append('^XZ')
     	$zpl_expiration_date = htmlspecialchars($_POST["expiration_date"]);
 
     	// Other unknown variables
-    	$zpl_net_weight = intval(htmlspecialchars($_POST["packaging_type"]));
-    	$zpl_gross_weight = intval(htmlspecialchars($_POST["packaging_type"]));
+    	$zpl_net_weight = htmlspecialchars($_POST["packaging_type"]);
+    	$zpl_gross_weight = htmlspecialchars($_POST["packaging_net_type"]);
 
 
 			$zpl_var[] = array();
@@ -560,8 +559,8 @@ qz.append('^XZ')
 			echo "var zpl_product_number = ". $zpl_product_number . ";\n";
 			echo "var zpl_elaboration_date = '". $zpl_elaboration_date . "';\n";
 			echo "var zpl_expiration_date = '". $zpl_expiration_date . "';\n";
-			echo "var zpl_net_weight = ". $zpl_net_weight . ";\n";
-			echo "var zpl_gross_weight = ". $zpl_gross_weight . ";\n";
+			echo "var zpl_net_weight = '". $zpl_net_weight . "';\n";
+			echo "var zpl_gross_weight = '". $zpl_gross_weight . "';\n";
 			echo "var code_count = ". $codeCount;
 		?>
 	</script>
@@ -576,11 +575,7 @@ qz.append('^XZ')
 
 	<input type="checkbox" name="lenguaje" id="lenguaje" value="english"> Imprimir en Ingles<br />
 
-	<input type="number" name="quantity" id="quantity" min="1" max="10"> Copias <br />
-
-	<input type="button" onClick="printZPL()" value="Imprimir en ingles" /><br /><br />
-	
-	<input type="button" onClick="printZPLSpanish()" value="Imprimir en español" /><br /><br />
+	<input type="number" value="1" name="quantity" id="quantity" min="1" max="10"> Copias <br />
 	
     <input type="button" value="Cerrar Dialogo" onClick="self.close()">
 
