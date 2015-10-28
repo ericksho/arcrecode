@@ -18,9 +18,10 @@ class PrintController < ApplicationController
 
     @product_code_post = params[:product_code]
     if @product_code_post.nil? || @product_code_post == ""
-      @description = "seleccione codigo de producto"
-      @product_name = "seleccione codigo de producto"
-      @packaging_type = "seleccione codigo de producto"
+      @description = "Seleccione Código de producto"
+      @product_name = "Seleccione Código de producto"
+      @packaging_type = "Seleccione Código de producto"
+      @packaging_net_type = "Seleccione Código de producto"
       product_ok = false
     else
       prod = Product.getProductByCode(@product_code_post)
