@@ -34,8 +34,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    @nextCode = @product.product.to_i
-    @originalCode = @product.original_code
+    
   end
 
   # POST /products
