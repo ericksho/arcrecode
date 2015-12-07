@@ -20,12 +20,14 @@ class PrintController < ApplicationController
     if @product_code_post.nil? || @product_code_post == ""
       @description = "Seleccione Código de producto"
       @product_name = "Seleccione Código de producto"
+      @product_english_name = "Seleccione Código de producto"
       @packaging_type = "Seleccione Código de producto"
       @packaging_net_type = "Seleccione Código de producto"
       product_ok = false
     else
       prod = Product.getProductByCode(@product_code_post)
       @product_name = ProductType.find_by_id(prod.product_type_id).name
+      @product_english_name = ProductType.find_by_id(prod.product_type_id).getProductEnglishName
       @packaging_type = PackingType.find_by_id(prod.packing_type_id).description
       @packaging_net_type = PackingType.find_by_id(prod.packing_type_id).netDescription
       product_ok = true

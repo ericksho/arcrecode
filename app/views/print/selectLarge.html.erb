@@ -24,6 +24,8 @@
 <%= hidden_field_tag(:product_code, @product_code_post) %>
 <%= label_tag "Nombre: " + @product_name%>
 <%= hidden_field_tag(:product_name, @product_name) %>
+<%= label_tag "Nombre en ingles: " + @product_english_name%>
+<%= hidden_field_tag(:product_english_name, @product_english_name) %>
 <%= label_tag "Envasado: " + @packaging_type%>
 <%= hidden_field_tag(:packaging_type, @packaging_type) %>
 <%= label_tag "Envasado neto: " + @packaging_net_type%>
