@@ -23,6 +23,7 @@ product_type = ProductType.new
 product_type.organic = true
 product_type.code = 1
 product_type.name = "aceite prueba 1"
+product_type.englishName = "test oil 1"
 product_type.save!
 
 packing_types = PackingType.new
@@ -35,9 +36,9 @@ product = Product.new
 product.description = "prueba 1"
 product.country = "780"
 product.enterprise = 1
-product.verifyDigit = product.getVerifyDigit
 product.product_type_id = 1
 product.packing_type_id = 1
+product.verifyDigit = product.getVerifyDigit
 product.save!
 
 batch = Batch.new
@@ -51,3 +52,4 @@ batch.intern_use_2 = 0
 batch.verify_digit = 4
 batch.product_type_id = 1
 batch.description = "Lote de prueba"
+batch.save!
